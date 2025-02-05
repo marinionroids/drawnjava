@@ -1,0 +1,27 @@
+const wallet = window.solflare;
+            const publicKey = wallet.publicKey;
+
+            // Sign the message and get the signature Uint8Array
+            const signResult = await wallet.signMessage(messageBytes);
+            console.log('Sign result:', signResult);
+
+            // Extract the signature Uint8Array from the result
+            const signatureBytes = signResult.signature;
+            console.log('Signature bytes:', signatureBytes);
+
+            // Convert the signature to base58
+            const signatureBase58 = bs58.encode(signatureBytes);
+            console.log('Signature as base58:', signatureBase58);
+
+            // Send to backend
+            const response = await fetch('http://localhost:8080/api/auth/verify', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    walletAddress: publicKey.toString(),
+                    message: messageText,
+                    signature: signatureBase58
+                })
+            });
