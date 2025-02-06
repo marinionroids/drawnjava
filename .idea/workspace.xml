@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="ddb187d5-c2a8-4b9d-835a-9363af0aa293" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/drawnBackEnd/src/main/java/com/casino/drawn/DTO/ApiResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/drawnBackEnd/src/main/java/com/casino/drawn/DTO/DepositDetails.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/drawnBackEnd/src/main/java/com/casino/drawn/DTO/ErrorDetails.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/drawnBackEnd/src/main/java/com/casino/drawn/Controller/Solana/SolanaController.java" beforeDir="false" afterPath="$PROJECT_DIR$/drawnBackEnd/src/main/java/com/casino/drawn/Controller/Solana/SolanaController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/drawnBackEnd/src/main/java/com/casino/drawn/Controller/UserProfile/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/drawnBackEnd/src/main/java/com/casino/drawn/Controller/UserProfile/LoginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/drawnBackEnd/src/main/java/com/casino/drawn/Services/Solana/DepositTransactionService.java" beforeDir="false" afterPath="$PROJECT_DIR$/drawnBackEnd/src/main/java/com/casino/drawn/Services/Solana/DepositTransactionService.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/drawnBackEnd" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;marinionroids&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/marinionroids/drawnjava.git&quot;,
+    &quot;accountId&quot;: &quot;33993a7e-cd92-4508-b218-ec570fa58160&quot;
+  }
+}</component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/drawnBackEnd/src/main/java/com/casino/drawn/Model/LootboxOpenings.java" root0="FORCE_HIGHLIGHTING" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHomeTypeForPersistence" value="WRAPPER" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="DEPENDENCY_CHECKER_PROBLEMS_TAB" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 5
+}</component>
+  <component name="ProjectId" id="2rvUdLUhkx5r9rVWXYJD7yr1ZFN" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Maven.drawn [clean].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.drawn [org.apache.maven.plugins:maven-clean-plugin:3.4.0:clean].executor&quot;: &quot;Run&quot;,
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;Spring Boot.DrawnApplication.executor&quot;: &quot;Run&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/Projects/testingONLY&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  },
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;mysql&quot;
+    ]
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="com.casino.drawn.Model" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.casino.drawn.DTO" />
+    </key>
+  </component>
+  <component name="RunAnythingCache">
+    <option name="myCommands">
+      <command value="mvn clean" />
+    </option>
+  </component>
+  <component name="RunManager">
+    <configuration name="DrawnApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="drawn" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.casino.drawn.DrawnApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-125ca727e0f0-intellij.indexing.shared.core-IU-243.23654.117" />
+        <option value="bundled-js-predefined-d6986cc7102b-822845ee3bb5-JavaScript-IU-243.23654.117" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="ddb187d5-c2a8-4b9d-835a-9363af0aa293" name="Changes" comment="" />
+      <created>1737439128554</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1737439128554</updated>
+      <workItem from="1737439129955" duration="11000" />
+      <workItem from="1737439170338" duration="4803000" />
+      <workItem from="1737861869628" duration="2000" />
+      <workItem from="1738267933360" duration="145000" />
+      <workItem from="1738300616452" duration="3511000" />
+      <workItem from="1738348996933" duration="6255000" />
+      <workItem from="1738356119725" duration="8906000" />
+      <workItem from="1738365793335" duration="20129000" />
+      <workItem from="1738440470089" duration="19299000" />
+      <workItem from="1738511451177" duration="29713000" />
+      <workItem from="1738619788882" duration="598000" />
+      <workItem from="1738633472859" duration="20128000" />
+      <workItem from="1738806957662" duration="4571000" />
+      <workItem from="1738815287552" duration="4827000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.lang.NullPointerException" package="java.lang" />
+          <option name="timeStamp" value="3" />
+        </breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+</project>
