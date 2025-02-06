@@ -37,7 +37,6 @@ public class LoginController {
         String token = jwtUtil.generateToken(request.getWalletAddress());
         userWalletService.verifyUserOrCreate(request.getWalletAddress());
         loginService.logUserLogin(request.getWalletAddress());
-        System.out.println("Here");
         return ResponseEntity.ok(new AuthResponse(token));
 
 
