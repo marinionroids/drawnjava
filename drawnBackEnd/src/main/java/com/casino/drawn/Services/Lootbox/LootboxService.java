@@ -95,7 +95,7 @@ public class  LootboxService {
             }
         }
 
-        return null;   //!!!!!!!!!!!!!!!!!!!!!!!!!! CHANGE THE API RESPONSES HERE ON THIS METHOD
+        return null;   //!!!!!!!!!!!!!!!!!!!!!!!!!! CHANGE THE API RESPONSES HERE ON THIS METHOD WITH PROPER DTORESPONSE/REQUEST
         //!!!!!!!!!!!!!!!!!!!!!!!!!! CHANGE THE API RESPONSES HERE ON THIS METHOD
         //!!!!!!!!!!!!!!!!!!!!!!!!!! CHANGE THE API RESPONSES HERE ON THIS METHOD
         //!!!!!!!!!!!!!!!!!!!!!!!!!! CHANGE THE API RESPONSES HERE ON THIS METHOD

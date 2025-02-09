@@ -1,4 +1,4 @@
-package com.casino.drawn.Services;
+package com.casino.drawn.Services.Solana;
 
 
 import com.casino.drawn.DTO.Solana.WithdrawRequest;
@@ -10,7 +10,6 @@ import com.casino.drawn.Repository.Solana.SecretKeyPairRepository;
 import com.casino.drawn.Repository.Solana.WithdrawTransactionsRepository;
 import com.casino.drawn.Repository.UserRepository;
 import com.casino.drawn.Services.JWT.JwtUtil;
-import com.casino.drawn.Services.Solana.SolanaService;
 import org.p2p.solanaj.core.Account;
 import org.p2p.solanaj.core.PublicKey;
 import org.p2p.solanaj.core.Transaction;
@@ -72,6 +71,7 @@ public class WithdrawService {
                 withdrawTransaction.setToAddress(request.getToWallet());
                 withdrawTransaction.setTransactionDate(new Timestamp(System.currentTimeMillis()));
                 withdrawTransaction.setUserId(user);
+                withdrawTransaction.setSignature(signature);
                 withdrawTransactionsRepository.save(withdrawTransaction);
 
 

@@ -4,7 +4,7 @@ package com.casino.drawn.Controller.Solana;
 import com.casino.drawn.DTO.API.ApiResponse;
 import com.casino.drawn.DTO.Solana.WithdrawRequest;
 import com.casino.drawn.DTO.Solana.WithdrawResponse;
-import com.casino.drawn.Services.WithdrawService;
+import com.casino.drawn.Services.Solana.WithdrawService;
 import org.p2p.solanaj.rpc.RpcException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

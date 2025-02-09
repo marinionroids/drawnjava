@@ -24,6 +24,7 @@ public class WithdrawTransaction {
     private String toAddress;
     private String fromAddress;
     private Timestamp transactionDate;
+    private String signature;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
