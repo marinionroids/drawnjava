@@ -1,22 +1,19 @@
 // App.jsx
-import React from 'react';
-import { AuthProvider } from './contexts/AuthContext';
-import { ModalProvider } from './contexts/ModalContext';
+import React, { useState } from 'react';
 import Navbar from './components/Navbar';
-import { DepositModal } from './components/DepositModal';
+import { AuthProvider } from './context/AuthContext';
 
-const App = () => {
+function App() {
     return (
         <AuthProvider>
-            <ModalProvider>
-                <div className="min-h-screen bg-gray-900">
-                    <Navbar />
-                    <DepositModal />
-                    {/* Other content */}
-                </div>
-            </ModalProvider>
+            <div className="min-h-screen bg-gray-100">
+                <Navbar />
+                <main className="container mx-auto px-4 py-8">
+                    {/* Other components will go here */}
+                </main>
+            </div>
         </AuthProvider>
     );
-};
+}
 
 export default App;

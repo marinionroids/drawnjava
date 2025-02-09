@@ -21,7 +21,6 @@ public class User {
     private int userId;
     private String username;
     private String primaryWalletAddress;
-
     private String recieverAddress;
 
     @Column(columnDefinition = "float default 0.0")
@@ -29,6 +28,10 @@ public class User {
 
     private Timestamp created;
     private Timestamp lastLogin;
+
+    private float  totalWager;
+    private float totalDeposit;
+    private float totalWithdraw;
 
 
 }

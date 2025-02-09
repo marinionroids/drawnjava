@@ -2,52 +2,26 @@ package com.casino.drawn.Services.Profile;
 
 
 
+import com.casino.drawn.DTO.UserProfile.ProfileResponse;
+import com.casino.drawn.DTO.UserProfile.ProfileRequest;
 import com.casino.drawn.DTO.UserProfile.UserProfileResponse;
 import com.casino.drawn.Model.User;
-import com.casino.drawn.Repository.Solana.SecretKeyPairRepository;
 import com.casino.drawn.Repository.UserRepository;
 import com.casino.drawn.Services.JWT.JwtUtil;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Objects;
 
 @Service
 public class UserService {
 
-    @Autowired
-    private UserRepository userRepository;
-    @Autowired
-    private JwtUtil jwtUtil;
-    @Autowired
-    private SecretKeyPairRepository secretKeyPairRepository;
+    private final UserRepository userRepository;
+    private final JwtUtil jwtUtil;
 
-
-    // Deducts the Lootbox value from the user Balance.
-    public void deductBalance(Integer userId, Float amount) {
-        User user = userRepository.findByUserId(userId);
-        if (user.getBalance() > amount) {
-            user.setBalance(user.getBalance() - amount);
-            userRepository.save(user);        }
-
+    public UserService(UserRepository userRepository, JwtUtil jwtUtil) {
+        this.userRepository = userRepository;
+        this.jwtUtil = jwtUtil;
     }
 
-    public void addWonItemValueToBalance(Integer userId, Float amount) {
-        User user = userRepository.findByUserId(userId);
-        user.setBalance(user.getBalance() + amount);
-        userRepository.save(user);
-    }
-
-    public ResponseEntity<?> checkForSufficientBalance(Integer userId, Float amount) {
-        User user = userRepository.findByUserId(userId);
-        Map<String, Object> response = new HashMap<>();
-        if (user.getBalance() < amount) {
-            return ResponseEntity.badRequest().body(response);
-        }
-        return ResponseEntity.ok(response);
-    }
 
 
     public UserProfileResponse getUserDetails(String token) {
@@ -63,6 +37,28 @@ public class UserService {
         return null;
     }
 
+    public String cleanUsername(String input) {
+        if (input == null) {
+            return null;
+        }
+        return input.toLowerCase().replaceAll("[^a-zA-Z0-9\\-_]", "");
+
+    }
+
+    public ProfileResponse changeProfileData(String token, ProfileRequest profileRequest) {
+        User user = userRepository.findByPrimaryWalletAddress(jwtUtil.validateToken(token));
+        String cleanUsername = cleanUsername(profileRequest.getUsername());
+        if (user != null) {
+            // Check whether the username already exists and ITS NOT THIS USER.
+            if (userRepository.existsByUsername(cleanUsername) && !Objects.equals(user.getUsername(), cleanUsername)) {
+                return new ProfileResponse("USERNAME_EXISTS","Username Already Exists");
+            }
+            user.setUsername(cleanUsername);
+            userRepository.save(user);
+            return new ProfileResponse("USERNAME_UPDATED","Profile Updated");
+        }
+        return new ProfileResponse("INVALID_TOKEN","Authentication Failed");
+    }
 
 
 }

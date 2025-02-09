@@ -5,12 +5,26 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ddb187d5-c2a8-4b9d-835a-9363af0aa293" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/drawnBackEnd/src/main/java/com/casino/drawn/DTO/ApiResponse.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/drawnBackEnd/src/main/java/com/casino/drawn/DTO/DepositDetails.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/drawnBackEnd/src/main/java/com/casino/drawn/DTO/ErrorDetails.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/drawnBackEnd/src/main/java/com/casino/drawn/Controller/Solana/SolanaController.java" beforeDir="false" afterPath="$PROJECT_DIR$/drawnBackEnd/src/main/java/com/casino/drawn/Controller/Solana/SolanaController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/drawnBackEnd/src/main/java/com/casino/drawn/Controller/UserProfile/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/drawnBackEnd/src/main/java/com/casino/drawn/Controller/UserProfile/LoginController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/drawnBackEnd/src/main/java/com/casino/drawn/Services/Solana/DepositTransactionService.java" beforeDir="false" afterPath="$PROJECT_DIR$/drawnBackEnd/src/main/java/com/casino/drawn/Services/Solana/DepositTransactionService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontEnd/src/context/AuthContext.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitattributes" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontEnd/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontEnd/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontEnd/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontEnd/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontEnd/postcss.config.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontEnd/public/solana-sol-logo.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontEnd/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontEnd/src/App.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontEnd/src/App.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontEnd/src/App.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontEnd/src/components/DepositModal.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontEnd/src/components/Navbar.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontEnd/src/components/Navbar.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontEnd/src/contexts/AuthContext.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontEnd/src/contexts/ModalContext.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontEnd/src/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontEnd/src/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontEnd/src/utils/api.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontEnd/tailwind.config.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontEnd/vite.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontEnd/vite.config.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,7 +39,7 @@
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/drawnBackEnd" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
   &quot;lastFilter&quot;: {
@@ -65,7 +79,10 @@
   </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
+    &quot;ASKED_MARK_IGNORED_FILES_AS_EXCLUDED&quot;: &quot;true&quot;,
+    &quot;Maven.drawn [clean,install].executor&quot;: &quot;Run&quot;,
     &quot;Maven.drawn [clean].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.drawn [install].executor&quot;: &quot;Run&quot;,
     &quot;Maven.drawn [org.apache.maven.plugins:maven-clean-plugin:3.4.0:clean].executor&quot;: &quot;Run&quot;,
     &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
     &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
@@ -105,6 +122,7 @@
   <component name="RunAnythingCache">
     <option name="myCommands">
       <command value="mvn clean" />
+      <command value="mvn clean install" />
     </option>
   </component>
   <component name="RunManager">
@@ -145,7 +163,13 @@
       <workItem from="1738619788882" duration="598000" />
       <workItem from="1738633472859" duration="20128000" />
       <workItem from="1738806957662" duration="4571000" />
-      <workItem from="1738815287552" duration="4827000" />
+      <workItem from="1738815287552" duration="5230000" />
+      <workItem from="1738869898752" duration="1752000" />
+      <workItem from="1738873826218" duration="7557000" />
+      <workItem from="1738977997344" duration="8396000" />
+      <workItem from="1738990953367" duration="1466000" />
+      <workItem from="1739053455993" duration="5607000" />
+      <workItem from="1739068990042" duration="2807000" />
     </task>
     <servers />
   </component>

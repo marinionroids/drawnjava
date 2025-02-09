@@ -7,9 +7,10 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Integer> {
-    boolean existsByUserId(int userId);
+    boolean existsByUsername(String username);
     boolean existsByPrimaryWalletAddress(String WalletAddress);
     User findByUserId(Integer userId);
     User findByPrimaryWalletAddress(String walletAddress);
 
+    User findByRecieverAddress(String recieverAddress);
 }

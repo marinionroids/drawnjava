@@ -76,9 +76,10 @@ public class DepositTransactionService {
         boolean finalResult = (Math.abs(primaryAmount - amount1) <= 0.0002f || Math.abs(amount1 - primaryAmount) <= 0.0002f) && recieverWalletAddress.equals(solanaTransactionRequest.getRecieverWalletAddress());
 
         if(finalResult){
-            // Update user's balance
+            // Update user's balance and totalDeposit
             User user = userRepository.findByPrimaryWalletAddress(solanaTransactionRequest.getSendingWalletAddress());
             Float depositAmount = solanaTransactionRequest.getAmount() * solanaService.getSolanaPrice();
+            user.setTotalDeposit(user.getTotalDeposit() + depositAmount);
             user.setBalance(user.getBalance() + depositAmount);
             userRepository.save(user);
 

@@ -1,9 +1,9 @@
 package com.casino.drawn.Controller.Solana;
 
 
-import com.casino.drawn.DTO.ApiResponse;
-import com.casino.drawn.DTO.DepositDetails;
-import com.casino.drawn.DTO.ErrorDetails;
+import com.casino.drawn.DTO.API.ApiResponse;
+import com.casino.drawn.DTO.Lootbox.DepositDetails;
+import com.casino.drawn.DTO.API.ErrorDetails;
 import com.casino.drawn.DTO.Solana.SolanaTransactionRequest;
 import com.casino.drawn.Repository.Solana.DepositTransactionsRepository;
 import com.casino.drawn.Services.Solana.DepositTransactionService;
@@ -15,7 +15,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.Timestamp;
-import java.time.LocalDateTime;
 
 
 @RestController

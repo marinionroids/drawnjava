@@ -9,4 +9,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface SecretKeyPairRepository extends JpaRepository<SecretKeyPair, Integer> {
     SecretKeyPair findByUser(User user);
+    SecretKeyPair findById(int id);
 }

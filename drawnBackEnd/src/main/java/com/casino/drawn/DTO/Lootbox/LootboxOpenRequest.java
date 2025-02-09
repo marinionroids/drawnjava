@@ -13,7 +13,7 @@ public class LootboxOpenRequest {
 
     private String transactionId;
     private int lootboxId;
-    private int userId;
+    private String recievingWalletAddress;
 
 
 
