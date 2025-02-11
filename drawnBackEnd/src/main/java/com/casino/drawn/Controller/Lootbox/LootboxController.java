@@ -2,6 +2,7 @@ package com.casino.drawn.Controller.Lootbox;
 
 import com.casino.drawn.DTO.API.ApiResponse;
 import com.casino.drawn.DTO.API.ErrorDetails;
+import com.casino.drawn.DTO.Lootbox.LootboxItemResponse;
 import com.casino.drawn.DTO.Lootbox.LootboxOpenRequest;
 import com.casino.drawn.Model.Lootbox.Item;
 import com.casino.drawn.Model.Lootbox.Lootbox;
@@ -19,36 +20,46 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api")
-@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin(origins = "http://localhost:3000")
 public class LootboxController {
 
-    @Autowired
-    private LootboxService lootboxService;
-    @Autowired
-    private JwtUtil jwtUtil;
-    @Autowired
-    private UserService userService;
-    @Autowired
-    private UserRepository userRepository;
-    @Autowired
-    private LootboxRepository lootboxRepository;
+    private final LootboxService lootboxService;
+    private final JwtUtil jwtUtil;
+    private final UserService userService;
+    private final UserRepository userRepository;
+    private final LootboxRepository lootboxRepository;
 
-
-    @GetMapping("/lootbox/{lootboxId}/items")
-    public List<Item> getLootboxItems(@PathVariable int lootboxId) {
-
-        return lootboxService.getLootboxItems(lootboxId);
+    public LootboxController(LootboxService lootboxService, JwtUtil jwtUtil, UserService userService, UserRepository userRepository, LootboxRepository lootboxRepository) {
+        this.lootboxService = lootboxService;
+        this.jwtUtil = jwtUtil;
+        this.userService = userService;
+        this.userRepository = userRepository;
+        this.lootboxRepository = lootboxRepository;
     }
 
+
+    @GetMapping("/lootbox/{lootboxName}/items")
+    public List<LootboxItemResponse> getLootboxItems(@PathVariable String lootboxName) {
+
+        return lootboxService.getLootboxItems(lootboxName);
+    }
+
+    @GetMapping("/lootbox/{lootboxName}")
+    public Lootbox getLootbox(@PathVariable String lootboxName) {
+        return lootboxRepository.getLootboxByName(lootboxName);
+    }
     @GetMapping("/lootbox")
-    public List<Lootbox> getLootbox() {
-        return lootboxService.getLootboxes();
+    public ResponseEntity<?> getLootbox() {
+        return ResponseEntity
+                .ok()
+                .body(lootboxService.getLootboxes()
+                );
     }
 
     @PostMapping("/lootbox/open")
     public ResponseEntity<?> openLootbox(
-                                @RequestHeader("Authorization") String token,
-                                @RequestBody LootboxOpenRequest request
+            @RequestHeader("Authorization") String token,
+            @RequestBody LootboxOpenRequest request
     ) {
         // Validate JWT token
         if (jwtUtil.validateToken(token) == null) {

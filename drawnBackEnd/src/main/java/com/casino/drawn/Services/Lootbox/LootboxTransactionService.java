@@ -29,7 +29,7 @@ public class LootboxTransactionService {
 
         lootboxOpenings.setItemValue(item.getPrice());
         lootboxOpenings.setItemWon(item.getName());
-        lootboxOpenings.setLootboxId(lootboxOpenRequest.getLootboxId());
+        lootboxOpenings.setLootboxName(lootboxOpenRequest.getLootboxName());
         lootboxOpenings.setTransactionId(lootboxOpenRequest.getTransactionId());
         lootboxOpenings.setTimeOpened(timestamp);
         lootboxOpenings.setUserId(user.getUserId());

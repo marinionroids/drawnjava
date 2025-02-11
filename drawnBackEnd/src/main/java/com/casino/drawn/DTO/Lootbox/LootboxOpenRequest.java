@@ -12,7 +12,7 @@ import lombok.Setter;
 public class LootboxOpenRequest {
 
     private String transactionId;
-    private int lootboxId;
+    private String lootboxName;
     private String recievingWalletAddress;
 
 

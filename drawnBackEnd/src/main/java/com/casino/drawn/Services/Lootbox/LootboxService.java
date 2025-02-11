@@ -1,5 +1,6 @@
 package com.casino.drawn.Services.Lootbox;
 
+import com.casino.drawn.DTO.Lootbox.LootboxItemResponse;
 import com.casino.drawn.DTO.Lootbox.LootboxOpenRequest;
 import com.casino.drawn.DTO.Lootbox.LootboxOpenResponse;
 import com.casino.drawn.Model.Lootbox.Item;
@@ -23,32 +24,34 @@ import java.util.stream.Collectors;
 @Service
 public class  LootboxService {
 
-    @Autowired
-    private LootboxRepository lootboxRepository;
+    private final LootboxRepository lootboxRepository;
+    private final LootboxItemRepository lootboxItemRepository;
+    private final LootboxTransactionService lootboxTransactionService;
+    private final UserRepository userRepository;
+    private final JwtUtil jwtUtil;
 
-    @Autowired
-    private LootboxItemRepository lootboxItemRepository;
-
-    @Autowired
-    private LootboxTransactionService lootboxTransactionService;
-    @Autowired
-    private UserService userService;
-    @Autowired
-    private UserRepository userRepository;
-    @Autowired
-    private JwtUtil jwtUtil;
-    @Autowired
-    private LootboxOpeningsRepository lootboxOpeningsRepository;
-
-
-    public List<Item> getLootboxItems(Integer lootboxId) {
-        List<LootboxItem> lootboxItems = lootboxItemRepository.findByLootboxId(lootboxId);
-
-        return lootboxItems.stream()
-                .map(LootboxItem::getItem)
-                .collect(Collectors.toList());
+    public LootboxService(LootboxRepository lootboxRepository, LootboxItemRepository lootboxItemRepository, LootboxTransactionService lootboxTransactionService, UserRepository userRepository, JwtUtil jwtUtil) {
+        this.lootboxRepository = lootboxRepository;
+        this.lootboxItemRepository = lootboxItemRepository;
+        this.lootboxTransactionService = lootboxTransactionService;
+        this.userRepository = userRepository;
+        this.jwtUtil = jwtUtil;
     }
 
+
+    public List<LootboxItemResponse> getLootboxItems(String lootboxName) {
+        List<LootboxItem> lootboxItems = lootboxItemRepository.findByLootboxName(lootboxName);
+
+        return lootboxItems.stream()
+                .map(lootboxItem -> new LootboxItemResponse(
+                        lootboxItem.getItem(),
+                        lootboxItem.getDropRate()))
+                .collect(Collectors.toList());
+
+    }
+
+
+    // Returns a JSON of all lootboxes as a list.
     public List<Lootbox> getLootboxes() {
         return lootboxRepository.findAll();
     }
@@ -56,7 +59,8 @@ public class  LootboxService {
     public LootboxOpenResponse openLootbox(String token, LootboxOpenRequest request) {
 
         User user = userRepository.findByPrimaryWalletAddress(jwtUtil.validateToken(token));
-        Lootbox lootbox = lootboxRepository.getLootboxById(request.getLootboxId());
+        Lootbox lootbox = lootboxRepository.getLootboxByName(request.getLootboxName());
+        System.out.println(lootbox.getName());
         if (user.getRecieverAddress().equals(request.getRecievingWalletAddress())) {
             // Check for sufficent balance and deduct.
             if (user.getBalance() >= lootbox.getPrice()) {

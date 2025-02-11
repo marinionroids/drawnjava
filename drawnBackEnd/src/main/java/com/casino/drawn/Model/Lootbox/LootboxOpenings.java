@@ -21,7 +21,7 @@ public class LootboxOpenings {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private int userId;
-    private int lootboxId;
+    private String lootboxName;
     private String itemWon;
     private float itemValue;
     private String transactionId;
