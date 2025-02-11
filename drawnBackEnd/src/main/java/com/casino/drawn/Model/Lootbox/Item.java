@@ -19,9 +19,11 @@ public class Item {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    private String lootboxSpot;
     private String name;
     private Float price;
     private String imageUrl;
+    private float dropRate;
 
 
 }

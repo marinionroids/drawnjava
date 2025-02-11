@@ -23,7 +23,7 @@ function HomePage() {
   return (
     <main className="max-w-7xl mx-auto mt-0"> {/* Added mt-12 for extra top margin */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4">
-        {boxes.map((box) => (
+        {[...boxes].sort((a, b) => b.price - a.price).map((box) => (
           <Link
             to={`/lootbox/${box.name.replace(/\s+/g, '').toLowerCase()}`}
             key={box.id}

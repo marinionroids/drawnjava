@@ -27,7 +27,4 @@ public class LootboxItem {
     @JoinColumn(name = "item_id")
     private Item item;
 
-
-    private Float dropRate;
-
 }

@@ -33,7 +33,7 @@ public class SolanaService {
     public SecretKeyPair createRecieverWallet() {
 
         SecretKeyPair secretKeyPair = new SecretKeyPair();
-        new RpcClient("http://api.devnet.solana.com");
+        new RpcClient("https://api.devnet.solana.com");
         Account account = new Account();
         String recieverPublicKey = account.getPublicKey().toBase58();
         byte[] recieverPrivateKey = account.getSecretKey();

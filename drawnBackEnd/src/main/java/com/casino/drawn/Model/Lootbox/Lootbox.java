@@ -18,6 +18,7 @@ public class Lootbox {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    private String lootboxName;
     private String name;
     private float price;
     private String imageUrl;

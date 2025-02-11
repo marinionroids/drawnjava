@@ -95,8 +95,6 @@ const HandleConnect = () => {
       const { success, message: responseMessage, data } = await response.json();
       // Save JWT in cookies
       Cookies.set('jwt', data.token, { expires: 1 });
-
-      console.log("Backend verification response:", data);
       setUserData(data);
       window.location.reload();
       setIsSignedIn(true);

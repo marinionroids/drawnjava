@@ -92,7 +92,7 @@ public class SolanaController {
                     .body(new ApiResponse(
                             false,
                             "Internal server error",
-                            new ErrorDetails("SERVER_ERROR", e.getMessage())
+                            new ErrorDetails("SERVER_ERROR", "An error has occurred")
                     ));
         }
     }

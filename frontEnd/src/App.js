@@ -6,6 +6,9 @@ import RootLayout from './components/RootLayout';
 import HomePage from './components/HomePage';
 import LootboxDetails from "./components/LootboxDetails";
 import { clusterApiUrl } from "@solana/web3.js";
+import { Buffer } from 'buffer';
+window.Buffer = Buffer;
+
 
 function App() {
   // Set up wallet configuration as a memo

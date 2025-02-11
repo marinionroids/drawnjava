@@ -175,6 +175,7 @@ const LootboxOpening = ({
                 style={{position: 'absolute', top: '5%', left: '5%'}}
               />
               <div className="absolute bottom-0 left-0 right-0 bg-black/50 p-1 text-center">
+                <span className="text-yellow-500 font-semibold text-sm">♦ {item.price.toFixed(2)}</span>
               </div>
             </div>
           </div>

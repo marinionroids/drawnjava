@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface LootboxItemRepository extends JpaRepository<LootboxItem, Integer> {
     List<LootboxItem> findByLootboxId(Integer lootboxId);
-    List<LootboxItem> findByLootboxName(String lootboxName);
+    List<LootboxItem> findByLootbox_LootboxName(String lootboxName);
 }

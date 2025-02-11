@@ -77,7 +77,7 @@ public class DepositTransactionService {
 
         if(finalResult){
             // Update user's balance and totalDeposit
-            User user = userRepository.findByPrimaryWalletAddress(solanaTransactionRequest.getSendingWalletAddress());
+            User user = userRepository.findByRecieverAddress(solanaTransactionRequest.getRecieverWalletAddress());
             Float depositAmount = solanaTransactionRequest.getAmount() * solanaService.getSolanaPrice();
             user.setTotalDeposit(user.getTotalDeposit() + depositAmount);
             user.setBalance(user.getBalance() + depositAmount);

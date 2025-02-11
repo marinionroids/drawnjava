@@ -40,12 +40,10 @@ public class  LootboxService {
 
 
     public List<LootboxItemResponse> getLootboxItems(String lootboxName) {
-        List<LootboxItem> lootboxItems = lootboxItemRepository.findByLootboxName(lootboxName);
-
+        List<LootboxItem> lootboxItems = lootboxItemRepository.findByLootbox_LootboxName(lootboxName);
         return lootboxItems.stream()
                 .map(lootboxItem -> new LootboxItemResponse(
-                        lootboxItem.getItem(),
-                        lootboxItem.getDropRate()))
+                        lootboxItem.getItem()))
                 .collect(Collectors.toList());
 
     }
@@ -59,8 +57,7 @@ public class  LootboxService {
     public LootboxOpenResponse openLootbox(String token, LootboxOpenRequest request) {
 
         User user = userRepository.findByPrimaryWalletAddress(jwtUtil.validateToken(token));
-        Lootbox lootbox = lootboxRepository.getLootboxByName(request.getLootboxName());
-        System.out.println(lootbox.getName());
+        Lootbox lootbox = lootboxRepository.getLootboxByLootboxName(request.getLootboxName());
         if (user.getRecieverAddress().equals(request.getRecievingWalletAddress())) {
             // Check for sufficent balance and deduct.
             if (user.getBalance() >= lootbox.getPrice()) {
@@ -79,7 +76,7 @@ public class  LootboxService {
             LootboxItem selectedItem = null;
 
             for (LootboxItem lootboxItem : lootboxItems) {
-                cumulativeProbability += lootboxItem.getDropRate();
+                cumulativeProbability += lootboxItem.getItem().getDropRate();
                 if (cumulativeProbability >= randomRollValue) {
                     selectedItem = lootboxItem;
                     break;

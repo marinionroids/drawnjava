@@ -46,7 +46,7 @@ public class LootboxController {
 
     @GetMapping("/lootbox/{lootboxName}")
     public Lootbox getLootbox(@PathVariable String lootboxName) {
-        return lootboxRepository.getLootboxByName(lootboxName);
+        return lootboxRepository.getLootboxByLootboxName(lootboxName);
     }
     @GetMapping("/lootbox")
     public ResponseEntity<?> getLootbox() {

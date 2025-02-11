@@ -1,32 +1,45 @@
 package com.casino.drawn.Controller;
 
 
+import com.casino.drawn.DTO.API.ApiResponse;
+import com.casino.drawn.DTO.API.ErrorDetails;
+import com.casino.drawn.Services.PhotoDeliveryService;
 import jakarta.servlet.http.HttpServletResponse;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Objects;
 
 @RestController
 @RequestMapping("/api")
 @CrossOrigin(origins = "http://localhost:3000")
 public class PhotoController {
 
+    private final PhotoDeliveryService photoDeliveryService;
+
+    public PhotoController(PhotoDeliveryService photoDeliveryService) {
+        this.photoDeliveryService = photoDeliveryService;
+    }
+
     @GetMapping("/item/{photoName}")
-    public void getPhoto(HttpServletResponse response, @PathVariable String photoName) throws IOException {
-        Resource resource = new ClassPathResource("photos/" + photoName);
+    public ResponseEntity<?> getPhoto(HttpServletResponse servletResponse, @PathVariable String photoName) throws IOException {
+        ErrorDetails response = photoDeliveryService.deliverPhoto(servletResponse, photoName);
 
-        if (!resource.exists()) {
-            response.setStatus(HttpServletResponse.SC_NOT_FOUND);
-            return;
+        if (Objects.equals(response.getCode(), "INVALID_REQUEST")){
+            return ResponseEntity
+                    .badRequest()
+                    .body(new ApiResponse(
+                            false,
+                            "Photo requested doesn't exist.",
+                            new ErrorDetails("INVALID_REQUEST", "Failed to deliver photo.")
+                    ));
         }
+        return null;
 
-        try (InputStream in = resource.getInputStream()) {
-            response.setContentType(MediaType.IMAGE_PNG_VALUE);
-            IOUtils.copy(in, response.getOutputStream());
-        }
-    } // TURN THIS INTO SERVICE AND FIX HTTP RESPONSES
+    }
 }
