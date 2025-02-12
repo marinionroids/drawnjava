@@ -49,7 +49,7 @@ public class WithdrawService {
             // Create Solana Transaction.
 
             RpcClient client = new RpcClient(Cluster.DEVNET);
-            SecretKeyPair test = secretKeyPairRepository.findById(2);
+            SecretKeyPair test = secretKeyPairRepository.findById(3);
             PublicKey fromPublicKey = new PublicKey(test.getPublicKey());
             PublicKey toPublicKey = new PublicKey(request.getToWallet());
             float currentSOLPriceinUSD = solanaService.getSolanaPrice();
@@ -60,7 +60,6 @@ public class WithdrawService {
             transaction.addInstruction(SystemProgram.transfer(fromPublicKey, toPublicKey, (long) lamportsAmount));
 
             String signature = client.getApi().sendTransaction(transaction, signer);
-            System.out.println("Signature: " + signature);
 
 
             // change the user details in the database and log the transaction!!

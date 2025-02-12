@@ -36,12 +36,11 @@ public class UserWalletService {
             user.setCreated(timestamp);
             user.setLastLogin(timestamp);
             user.setPrimaryWalletAddress(walletAddress);
-            user.setUsername(UUID.randomUUID().toString().replace("-", ""));
+            user.setUsername(UUID.randomUUID().toString().replace("-", "").substring(0,10));
             user.setRecieverAddress(newRecieverWallet.getPublicKey());
             userRepository.save(user);
             newRecieverWallet.setUser(user);
             secretKeyPairRepository.save(newRecieverWallet);
-            System.out.println("Wallet address: " + user.getUserId());
         }
     }
 

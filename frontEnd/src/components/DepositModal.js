@@ -4,7 +4,9 @@ import { Connection } from '@solana/web3.js';
 import Cookies from "js-cookie";
 
 const DepositModal = ({ isOpen, onClose }) => {
+    const [mode, setMode] = useState('deposit'); // 'deposit' or 'withdraw'
     const [amount, setAmount] = useState('');
+    const [withdrawAddress, setWithdrawAddress] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState('');
     const [successMessage, setSuccessMessage] = useState('');
@@ -21,11 +23,68 @@ const DepositModal = ({ isOpen, onClose }) => {
         return () => window.removeEventListener('keydown', handleEscape);
     }, [onClose]);
 
-    const closeDeposit = () => {
+    const closeModal = () => {
         setAmount('');
+        setWithdrawAddress('');
         setError('');
         setSuccessMessage('');
+        setMode('deposit');
         onClose();
+    };
+
+    const handleWithdraw = async () => {
+        try {
+            setError('');
+            setSuccessMessage('');
+
+            const withdrawAmount = parseFloat(amount);
+            if (isNaN(withdrawAmount) || withdrawAmount < 0.1) {
+                setError('Minimum withdrawal amount is 0.1');
+                return;
+            }
+
+            if (!withdrawAddress) {
+                setError('Please enter a valid SOL address');
+                return;
+            }
+
+            setIsLoading(true);
+
+            // Get JWT token
+            const token = Cookies.get('jwt');
+            if (!token) {
+                throw new Error('No authentication token found');
+            }
+
+            const response = await fetch('http://localhost:8080/api/auth/withdraw', {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    toWallet: withdrawAddress,
+                    amountInUSD: withdrawAmount,
+                }),
+            });
+
+            const responseData = await response.json();
+
+            if (!response.ok) {
+                throw new Error(responseData.message || 'Failed to process withdrawal');
+            }
+
+            setSuccessMessage('Withdrawal request submitted successfully!');
+            setTimeout(() => {
+                closeModal();
+            }, 1000);
+
+        } catch (err) {
+            console.error('Withdrawal error:', err);
+            setError(err.message || 'Failed to complete withdrawal');
+        } finally {
+            setIsLoading(false);
+        }
     };
 
     const handleDeposit = async () => {
@@ -137,7 +196,7 @@ const DepositModal = ({ isOpen, onClose }) => {
             // Handle success
             setSuccessMessage('Deposit processed successfully!');
             setTimeout(() => {
-                closeDeposit();
+                closeModal();
             }, 1000);
 
         } catch (err) {
@@ -152,18 +211,38 @@ const DepositModal = ({ isOpen, onClose }) => {
 
     return (
         <div className="fixed inset-0 z-50 flex items-center justify-center">
-            {/* Backdrop */}
             <div
                 className="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm"
-                onClick={closeDeposit}
+                onClick={closeModal}
             />
 
-            {/* Modal */}
             <div className="bg-gray-900 border border-gray-700 rounded-xl p-6 w-full max-w-md mx-4 relative z-10">
+                {/* Header with tabs */}
                 <div className="flex justify-between items-center mb-6">
-                    <h2 className="text-xl font-semibold text-white">Deposit Funds</h2>
+                    <div className="flex space-x-4">
+                        <button
+                            onClick={() => setMode('deposit')}
+                            className={`px-4 py-2 rounded-lg transition-colors ${
+                                mode === 'deposit'
+                                    ? 'bg-gray-800 text-white'
+                                    : 'text-gray-400 hover:text-white'
+                            }`}
+                        >
+                            Deposit
+                        </button>
+                        <button
+                            onClick={() => setMode('withdraw')}
+                            className={`px-4 py-2 rounded-lg transition-colors ${
+                                mode === 'withdraw'
+                                    ? 'bg-gray-800 text-white'
+                                    : 'text-gray-400 hover:text-white'
+                            }`}
+                        >
+                            Withdraw
+                        </button>
+                    </div>
                     <button
-                        onClick={closeDeposit}
+                        onClick={closeModal}
                         className="text-gray-400 hover:text-white transition-colors"
                     >
                         ✕
@@ -173,18 +252,40 @@ const DepositModal = ({ isOpen, onClose }) => {
                 <div className="space-y-4">
                     <div>
                         <label className="block text-sm font-medium text-gray-200 mb-2">
-                            Amount to Deposit (SOL)
+                            Amount ({mode === 'withdraw' ? '♦' : 'SOL'})
                         </label>
+                        {mode === 'withdraw' && (
+                            <p className="text-lg text-gray-400 mb-2">
+                                Enter amount in ♦ . <br/> Payouts will be converted to SOL.
+                                <br />
+                                Minimum Withdraw: ♦ 1
+                            </p>
+                        )}
                         <input
                             type="number"
                             value={amount}
                             onChange={(e) => setAmount(e.target.value)}
                             placeholder="Enter amount"
-                            min="0"
+                            min={mode === 'withdraw' ? "0.1" : "0"}
                             step="0.01"
                             className="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-2 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent"
                         />
                     </div>
+
+                    {mode === 'withdraw' && (
+                        <div>
+                            <label className="block text-sm font-medium text-gray-200 mb-2">
+                                Enter your SOL address
+                            </label>
+                            <input
+                                type="text"
+                                value={withdrawAddress}
+                                onChange={(e) => setWithdrawAddress(e.target.value)}
+                                placeholder="SOL address"
+                                className="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-2 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent"
+                            />
+                        </div>
+                    )}
 
                     {error && (
                         <div className="bg-red-900 bg-opacity-50 border border-red-500 rounded-lg p-3 text-red-200 text-sm">
@@ -197,25 +298,35 @@ const DepositModal = ({ isOpen, onClose }) => {
                             {successMessage}
                         </div>
                     )}
+
+                    {mode === 'withdraw' && amount && (
+                        <div className="text-center text-gray-400 text-sm">
+                            ♦ {amount} ≈ {(parseFloat(amount) * 0.001).toFixed(3)} SOL
+                        </div>
+                    )}
                 </div>
 
                 <div className="flex justify-end gap-3 mt-6">
                     <button
-                        onClick={closeDeposit}
+                        onClick={closeModal}
                         className="px-4 py-2 rounded-lg bg-gray-800 text-white hover:bg-gray-700 transition-colors"
                     >
                         Cancel
                     </button>
                     <button
-                        onClick={handleDeposit}
-                        disabled={!amount || isLoading}
-                        className={`px-6 py-2 rounded-lg bg-gradient-to-r from-green-500 to-green-600 text-white font-medium 
-              ${!amount || isLoading
+                        onClick={mode === 'deposit' ? handleDeposit : handleWithdraw}
+                        disabled={!amount || isLoading || (mode === 'withdraw' && !withdrawAddress)}
+                        className={`px-6 py-2 rounded-lg ${
+                            mode === 'withdraw'
+                                ? 'bg-green-500 hover:bg-green-600'
+                                : 'bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700'
+                        } text-white font-medium 
+                        ${(!amount || isLoading || (mode === 'withdraw' && !withdrawAddress))
                             ? 'opacity-50 cursor-not-allowed'
-                            : 'hover:from-green-600 hover:to-green-700'} 
-              transition-all duration-200 shadow-lg hover:shadow-green-500/30`}
+                            : ''} 
+                        transition-all duration-200 shadow-lg hover:shadow-green-500/30`}
                     >
-                        {isLoading ? 'Processing...': "Deposit"}
+                        {isLoading ? 'Processing...' : mode === 'withdraw' ? 'Withdraw SOL' : 'Deposit'}
                     </button>
                 </div>
             </div>
@@ -223,4 +334,4 @@ const DepositModal = ({ isOpen, onClose }) => {
     );
 };
 
-export default DepositModal
+export default DepositModal;
