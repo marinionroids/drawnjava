@@ -56,7 +56,7 @@ const DepositModal = ({ isOpen, onClose }) => {
                 throw new Error('No authentication token found');
             }
 
-            const response = await fetch('http://localhost:8080/api/auth/withdraw', {
+            const response = await fetch('http://drawngg.com/api/auth/withdraw', {
                 method: 'POST',
                 headers: {
                     'Authorization': `Bearer ${token}`,
@@ -163,7 +163,7 @@ const DepositModal = ({ isOpen, onClose }) => {
                 throw new Error('No authentication token found');
             }
 
-            const response = await fetch('http://localhost:8080/api/auth/deposit', {
+            const response = await fetch('http://drawngg.com/api/auth/deposit', {
                 method: 'POST',
                 headers: {
                     'Authorization': `Bearer ${token}`,
@@ -256,10 +256,9 @@ const DepositModal = ({ isOpen, onClose }) => {
                         </label>
                         {mode === 'withdraw' && (
                             <p className="text-lg text-gray-400 mb-2">
-                                Enter amount in ♦ . <br/> Payouts will be converted to SOL.
-                                <br />
-                                Minimum Withdraw: ♦ 1
-                            </p>
+                                Enter amount in $ . <br/> Payouts will be converted to SOL.
+                                <br /><br /><br />
+                                Amount: $</p>
                         )}
                         <input
                             type="number"
@@ -299,11 +298,7 @@ const DepositModal = ({ isOpen, onClose }) => {
                         </div>
                     )}
 
-                    {mode === 'withdraw' && amount && (
-                        <div className="text-center text-gray-400 text-sm">
-                            ♦ {amount} ≈ {(parseFloat(amount) * 0.001).toFixed(3)} SOL
-                        </div>
-                    )}
+
                 </div>
 
                 <div className="flex justify-end gap-3 mt-6">

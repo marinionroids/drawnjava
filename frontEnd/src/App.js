@@ -5,40 +5,42 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import RootLayout from './components/RootLayout';
 import HomePage from './components/HomePage';
 import LootboxDetails from "./components/LootboxDetails";
+import Profile from './components/Profile';
 import { clusterApiUrl } from "@solana/web3.js";
 import { Buffer } from 'buffer';
+import {UserBalanceProvider} from "./components/UserBalanceContext";
 window.Buffer = Buffer;
-
 
 function App() {
   // Set up wallet configuration as a memo
   const wallets = useMemo(
-    () => [new SolflareWalletAdapter()],
-    []
+      () => [new SolflareWalletAdapter()],
+      []
   );
 
   // You can use either mainnet-beta or devnet
   const endpoint = useMemo(() => clusterApiUrl('devnet'), []);
 
   return (
-    <ConnectionProvider endpoint={endpoint}>
-      <WalletProvider
-        wallets={wallets}
-        autoConnect={false}
-      >
-        <Router>
-          <div className="min-h-screen bg-gray-900">
+      <UserBalanceProvider>
+      <ConnectionProvider endpoint={endpoint}>
+        <WalletProvider
+            wallets={wallets}
+            autoConnect={false}
+        >
+          <Router>
             <RootLayout>
               <Routes>
                 <Route path="/" element={<Navigate to="/lootbox" replace />} />
                 <Route path="/lootbox" element={<HomePage />} />
                 <Route path="/lootbox/:name" element={<LootboxDetails />} />
+                <Route path="/profile" element={<Profile />} />
               </Routes>
             </RootLayout>
-          </div>
-        </Router>
-      </WalletProvider>
-    </ConnectionProvider>
+          </Router>
+        </WalletProvider>
+      </ConnectionProvider>
+      </UserBalanceProvider>
   );
 }
 

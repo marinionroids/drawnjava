@@ -1,10 +1,20 @@
+// Navbar.jsx
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import DepositModal from './DepositModal';
 
-const Navbar = ({ isConnected, isSignedIn, username, level, balance = 0, onConnect, onDisconnect }) => {
-  const [isDepositModalOpen, setIsDepositModalOpen] = useState(false);
+const Navbar = ({
+                  isConnected,
+                  isSignedIn,
+                  username,
+                  level,
+                  balance = 0,
+                  onConnect,
+                  onDisconnect,
+                  onTestUser  // Add this line
+                }) => {  const [isDepositModalOpen, setIsDepositModalOpen] = useState(false);
   const shouldShowBalance = isConnected || isSignedIn;
+  const navigate = useNavigate();
 
   const handleOpenDepositModal = () => {
     setIsDepositModalOpen(true);
@@ -12,6 +22,10 @@ const Navbar = ({ isConnected, isSignedIn, username, level, balance = 0, onConne
 
   const handleCloseDepositModal = () => {
     setIsDepositModalOpen(false);
+  };
+
+  const handleProfileClick = () => {
+    navigate('/profile');
   };
 
   return (
@@ -65,26 +79,40 @@ const Navbar = ({ isConnected, isSignedIn, username, level, balance = 0, onConne
                   )}
 
                   {isConnected ? (
-                      <div className="flex items-center space-x-3 bg-gray-800 rounded-xl p-2 border border-gray-700">
+                      <div
+                          onClick={handleProfileClick}
+                          className="flex items-center space-x-3 bg-gray-800 rounded-xl p-2 border border-gray-700 cursor-pointer hover:bg-gray-700 transition-all duration-200"
+                      >
                         <div className="w-10 h-10 bg-gradient-to-br from-gray-600 to-gray-700 rounded-lg shadow-inner"></div>
                         <div className="text-gray-200">
                           <div className="font-medium">{username}</div>
                           <div className="text-sm text-gray-400">LEVEL {level}</div>
                         </div>
                         <button
-                            onClick={onDisconnect}
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              onDisconnect();
+                            }}
                             className="ml-4 bg-gradient-to-r from-red-500 to-red-600 px-6 py-2 rounded-lg text-white hover:from-red-600 hover:to-red-700 transition-all duration-200 font-medium shadow-lg hover:shadow-red-500/30"
                         >
                           Disconnect
                         </button>
                       </div>
                   ) : (
-                      <button
-                          onClick={onConnect}
-                          className="bg-gradient-to-r from-blue-500 to-blue-600 px-8 py-3 rounded-lg text-white hover:from-blue-600 hover:to-blue-700 transition-all duration-200 font-medium shadow-lg hover:shadow-blue-500/30"
-                      >
-                        Connect
-                      </button>
+                      <div className="flex gap-2">
+                        <button
+                            onClick={onConnect}
+                            className="bg-gradient-to-r from-blue-500 to-blue-600 px-8 py-3 rounded-lg text-white hover:from-blue-600 hover:to-blue-700 transition-all duration-200 font-medium shadow-lg hover:shadow-blue-500/30"
+                        >
+                          Connect
+                        </button>
+                        <button
+                            onClick={onTestUser}
+                            className="bg-gradient-to-r from-purple-500 to-purple-600 px-8 py-3 rounded-lg text-white hover:from-purple-600 hover:to-purple-700 transition-all duration-200 font-medium shadow-lg hover:shadow-purple-500/30"
+                        >
+                          Test User
+                        </button>
+                      </div>
                   )}
                 </div>
               </div>

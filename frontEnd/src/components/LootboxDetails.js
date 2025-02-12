@@ -2,9 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import axios from 'axios';
 import LootboxOpening from './LootboxOpening';
+import { useUserBalance } from './UserBalanceContext';
 
 function LootboxDetails() {
   const { name } = useParams();
+  const { balance, updateBalance, updateBalanceFromServer } = useUserBalance();
   const [boxDetails, setBoxDetails] = useState(null);
   const [items, setItems] = useState([]);
   const [isOpening, setIsOpening] = useState(false);
@@ -24,9 +26,9 @@ function LootboxDetails() {
   useEffect(() => {
     const fetchDetails = async () => {
       try {
-        const response = await axios.get(`http://localhost:8080/api/lootbox/${name}`);
+        const response = await axios.get(`http://drawngg.com/api/lootbox/${name}`);
         setBoxDetails(response.data);
-        const itemsResponse = await axios.get(`http://localhost:8080/api/lootbox/${name}/items`);
+        const itemsResponse = await axios.get(`http://drawngg.com/api/lootbox/${name}/items`);
         setItems(itemsResponse.data);
       } catch (error) {
         console.error('Error fetching box details:', error);
@@ -36,8 +38,17 @@ function LootboxDetails() {
     fetchDetails();
   }, [name]);
 
-  const handleOpeningComplete = () => {
+  const handleOpenBox = () => {
+    setIsOpening(true);
+    // Immediately update balance locally
+    const newBalance = balance - boxDetails.price;
+    updateBalance(newBalance);
+  };
+
+  const handleOpeningComplete = async () => {
     setIsOpening(false);
+    // After animation completes, sync with server
+    await updateBalanceFromServer();
   };
 
   const handleError = (error) => {
@@ -83,32 +94,32 @@ function LootboxDetails() {
 
           <div className="flex justify-center mb-8">
             <button
-                onClick={() => setIsOpening(true)}
-                disabled={isOpening}
+                onClick={handleOpenBox}
+                disabled={isOpening || balance < boxDetails.price}
                 className={`
-              relative overflow-hidden
-              bg-yellow-500 hover:bg-yellow-600 disabled:bg-yellow-800 
-              px-4 py-2 rounded-md transition-colors
-              transform hover:scale-105 active:scale-95
-              shadow-lg shadow-yellow-500/20 text-lg text-[rgb(33,37,41)]
-            `}
+          relative overflow-hidden
+          bg-yellow-500 hover:bg-yellow-600 disabled:bg-yellow-800 
+          px-4 py-2 rounded-md transition-colors
+          transform hover:scale-105 active:scale-95
+          shadow-lg shadow-yellow-500/20 text-lg text-[rgb(33,37,41)]
+        `}
             >
               <div
                   className="absolute inset-0 w-[350%] h-full animate-spin"
                   style={{
                     background: `repeating-linear-gradient(
-                  45deg,
-                  transparent,
-                  transparent 12px,
-                  rgba(20, 22, 26, 0.1) 0px,
-                  rgba(20, 22, 26, 0.1) 24px
-                )`,
+              45deg,
+              transparent,
+              transparent 12px,
+              rgba(20, 22, 26, 0.1) 0px,
+              rgba(20, 22, 26, 0.1) 24px
+            )`,
                     left: '0'
                   }}
               />
               <span className="relative z-10">
-              Open for ♦ {boxDetails.price.toFixed(2)}
-            </span>
+          Open for ♦ {boxDetails.price.toFixed(2)}
+        </span>
             </button>
           </div>
 

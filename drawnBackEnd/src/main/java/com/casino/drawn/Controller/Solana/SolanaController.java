@@ -19,7 +19,7 @@ import java.sql.Timestamp;
 
 @RestController
 @RequestMapping("/api")
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "https://drawngg.com")
 public class SolanaController {
 
 

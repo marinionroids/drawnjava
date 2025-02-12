@@ -71,6 +71,11 @@
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
+			<groupId>org.mariadb.jdbc</groupId>
+			<artifactId>mariadb-java-client</artifactId>
+			<version>3.3.2</version>
+		</dependency>
+		<dependency>
 			<groupId>org.sol4k</groupId>
 			<artifactId>sol4k</artifactId>
 			<version>0.5.7</version>

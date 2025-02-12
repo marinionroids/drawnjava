@@ -3,8 +3,10 @@ import { useWallet } from "@solana/wallet-adapter-react";
 import bs58 from "bs58";
 import Cookies from 'js-cookie';
 import Navbar from "./Navbar";
+import { useUserBalance } from './UserBalanceContext';
 
 const HandleConnect = () => {
+  const { balance, updateBalance } = useUserBalance();
   const {
     select,
     connect,
@@ -26,7 +28,7 @@ const HandleConnect = () => {
         return null;
       }
 
-      const response = await fetch("http://localhost:8080/api/user", {
+      const response = await fetch("http://drawngg.com/api/user", {
         method: "GET",
         headers: {
           "Authorization": `Bearer ${jwt}`,
@@ -38,12 +40,14 @@ const HandleConnect = () => {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
 
-      const { success, message: responseMessage, data } = await response.json();
+      const { data } = await response.json();
+      if (data.balance !== undefined) {
+        updateBalance(data.balance); // Update balance in context
+      }
       Cookies.set('recievingAddress', data.recievingAddress);
       return data;
     } catch (error) {
       console.error("Error fetching user data:", error);
-      // If there's an error (like invalid token), clear the cookies and states
       Cookies.remove('jwt');
       setIsSignedIn(false);
       setUserData(null);
@@ -74,9 +78,40 @@ const HandleConnect = () => {
     }
   }, [connected, publicKey]);
 
+  // Add this function in HandleConnect.jsx after handleDisconnect
+  const handleTestUser = async () => {
+    try {
+      const response = await fetch("http://drawngg.com/api/auth/verify", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          walletAddress: "AX2nzQy66m9MrrzezaGnt6c84Cm7GwtJb3GAapczXvwN",
+          message: "Welcome to Lootbox!",
+          signature: "5mcAQuvLRUyD5rNHSZgkSif4tyKfyKEgVZF8YdikVfjProUHbpya6KaJiZ8Kc6QXKrxP3BiTdByoAFNiaZRSVE8p"
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const { data } = await response.json();
+      // Save JWT in cookies
+      Cookies.set('jwt', data.token, { expires: 1 });
+      setUserData(data);
+      setIsSignedIn(true);
+      window.location.reload();
+    } catch (error) {
+      console.error("Test user auth failed:", error);
+      alert(`Error authenticating test user: ${error.message}`);
+    }
+  };
+
   const verifyWithBackend = async (message, signature) => {
     try {
-      const response = await fetch("http://localhost:8080/api/auth/verify", {
+      const response = await fetch("http://drawngg.com/api/auth/verify", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -158,8 +193,6 @@ const HandleConnect = () => {
   };
 
   const username = userData?.username;
-  const balance = userData?.balance;
-
   return (
       <Navbar
           isConnected={isConnected || isSignedIn}
@@ -168,6 +201,7 @@ const HandleConnect = () => {
           level={"GAMBLER"}
           onConnect={handleConnect}
           onDisconnect={handleDisconnect}
+          onTestUser={handleTestUser}  // Add this line
           userData={userData}
       />
   );

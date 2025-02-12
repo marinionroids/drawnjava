@@ -65,7 +65,7 @@ const LootboxOpening = ({
 
         await new Promise(resolve => setTimeout(resolve, 50));
 
-        const response = await fetch(`http://localhost:8080/api/lootbox/open`, {
+        const response = await fetch(`http://drawngg.com/api/lootbox/open`, {
           method: 'POST',
           headers: {
               'Content-Type': 'application/json',
