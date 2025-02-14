@@ -4,26 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ddb187d5-c2a8-4b9d-835a-9363af0aa293" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/frontEnd/config-overrides.ks" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontEnd/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/frontEnd/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontEnd/.idea/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/frontEnd/.idea/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontEnd/.idea/frontend.iml" beforeDir="false" afterPath="$PROJECT_DIR$/frontEnd/.idea/frontend.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontEnd/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/frontEnd/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontEnd/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/frontEnd/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontEnd/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontEnd/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontEnd/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontEnd/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontEnd/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontEnd/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontEnd/src/components/DepositModal.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontEnd/src/components/DepositModal.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontEnd/src/components/HandleConnect.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontEnd/src/components/HandleConnect.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontEnd/src/components/HomePage.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontEnd/src/components/HomePage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontEnd/src/components/LootboxDetails.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontEnd/src/components/LootboxDetails.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontEnd/src/components/LootboxOpening.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontEnd/src/components/LootboxOpening.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontEnd/src/components/RootLayout.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontEnd/src/components/RootLayout.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontEnd/src/components/UserBalanceContext.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontEnd/src/components/UserBalanceContext.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontEnd/src/components/profile.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontEnd/src/components/profile.js" afterDir="false" />
-    </list>
+    <list default="true" id="ddb187d5-c2a8-4b9d-835a-9363af0aa293" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -185,7 +166,7 @@
       <workItem from="1739314387226" duration="6422000" />
       <workItem from="1739330493840" duration="8289000" />
       <workItem from="1739498874942" duration="244000" />
-      <workItem from="1739501954266" duration="2194000" />
+      <workItem from="1739501954266" duration="2826000" />
     </task>
     <servers />
   </component>
