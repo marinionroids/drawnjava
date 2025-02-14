@@ -6,11 +6,13 @@ import axios from 'axios';
 function HomePage() {
   const [boxes, setBoxes] = useState([]);
   const [category, setCategory] = useState('Classic');
+  console.log('HomePage rendering');
+
 
   useEffect(() => {
     const fetchBoxes = async () => {
       try {
-        const response = await axios.get('http://drawngg.com/api/lootbox');
+        const response = await axios.get('https://drawngg.com/api/lootbox');
         setBoxes(response.data);
       } catch (error) {
         console.error('Error fetching boxes:', error);

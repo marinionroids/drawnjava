@@ -1,5 +1,6 @@
 {
   "name": "frontend",
+  "homepage": "/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -9,6 +10,7 @@
     "@project-serum/anchor": "^0.26.0",
     "@solana/wallet-adapter-base": "^0.9.23",
     "@solana/wallet-adapter-react": "^0.15.35",
+    "@solana/wallet-adapter-react-ui": "^0.9.35",
     "@solana/wallet-adapter-wallets": "^0.19.32",
     "@solana/web3.js": "^1.95.8",
     "@testing-library/jest-dom": "^5.17.0",
@@ -24,6 +26,7 @@
     "https-browserify": "^1.0.0",
     "js-cookie": "^3.0.5",
     "react": "^18.2.0",
+    "react-app-rewired": "^2.2.1",
     "react-dom": "^18.2.0",
     "react-router-dom": "^7.0.2",
     "react-scripts": "5.0.1",

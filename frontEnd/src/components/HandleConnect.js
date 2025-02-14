@@ -28,7 +28,7 @@ const HandleConnect = () => {
         return null;
       }
 
-      const response = await fetch("http://drawngg.com/api/user", {
+      const response = await fetch("https://drawngg.com/api/user", {
         method: "GET",
         headers: {
           "Authorization": `Bearer ${jwt}`,
@@ -81,7 +81,7 @@ const HandleConnect = () => {
   // Add this function in HandleConnect.jsx after handleDisconnect
   const handleTestUser = async () => {
     try {
-      const response = await fetch("http://drawngg.com/api/auth/verify", {
+      const response = await fetch("https://drawngg.com/api/auth/verify", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -111,7 +111,7 @@ const HandleConnect = () => {
 
   const verifyWithBackend = async (message, signature) => {
     try {
-      const response = await fetch("http://drawngg.com/api/auth/verify", {
+      const response = await fetch("https://drawngg.com/api/auth/verify", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

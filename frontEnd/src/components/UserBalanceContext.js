@@ -15,7 +15,7 @@ export const UserBalanceProvider = ({ children }) => {
             const jwt = Cookies.get('jwt');
             if (!jwt) return;
 
-            const response = await fetch("http://drawngg.com/api/user", {
+            const response = await fetch("https://drawngg.com/api/user", {
                 headers: {
                     "Authorization": `Bearer ${jwt}`,
                     "Content-Type": "application/json",

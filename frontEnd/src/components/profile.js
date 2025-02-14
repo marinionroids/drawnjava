@@ -14,7 +14,7 @@ const Profile = () => {
     useEffect(() => {
         const fetchUserData = async () => {
             try {
-                const response = await fetch("http://drawngg.com/api/user", {
+                const response = await fetch("https://drawngg.com/api/user", {
                     method: "GET",
                     headers: {
                         "Authorization": `Bearer ${jwt}`,
@@ -42,7 +42,7 @@ const Profile = () => {
     const handleSave = async () => {
         setIsSaving(true);
         try {
-            const response = await fetch('http://drawngg.com/api/user', {
+            const response = await fetch('https://drawngg.com/api/user', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

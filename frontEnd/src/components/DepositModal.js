@@ -56,7 +56,7 @@ const DepositModal = ({ isOpen, onClose }) => {
                 throw new Error('No authentication token found');
             }
 
-            const response = await fetch('http://drawngg.com/api/auth/withdraw', {
+            const response = await fetch('https://drawngg.com/api/auth/withdraw', {
                 method: 'POST',
                 headers: {
                     'Authorization': `Bearer ${token}`,
@@ -163,7 +163,7 @@ const DepositModal = ({ isOpen, onClose }) => {
                 throw new Error('No authentication token found');
             }
 
-            const response = await fetch('http://drawngg.com/api/auth/deposit', {
+            const response = await fetch('https://drawngg.com/api/auth/deposit', {
                 method: 'POST',
                 headers: {
                     'Authorization': `Bearer ${token}`,

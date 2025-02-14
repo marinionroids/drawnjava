@@ -26,9 +26,9 @@ function LootboxDetails() {
   useEffect(() => {
     const fetchDetails = async () => {
       try {
-        const response = await axios.get(`http://drawngg.com/api/lootbox/${name}`);
+        const response = await axios.get(`https://drawngg.com/api/lootbox/${name}`);
         setBoxDetails(response.data);
-        const itemsResponse = await axios.get(`http://drawngg.com/api/lootbox/${name}/items`);
+        const itemsResponse = await axios.get(`https://drawngg.com/api/lootbox/${name}/items`);
         setItems(itemsResponse.data);
       } catch (error) {
         console.error('Error fetching box details:', error);
