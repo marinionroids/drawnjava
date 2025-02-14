@@ -40,14 +40,12 @@ function LootboxDetails() {
 
   const handleOpenBox = () => {
     setIsOpening(true);
-    // Immediately update balance locally
     const newBalance = balance - boxDetails.price;
     updateBalance(newBalance);
   };
 
   const handleOpeningComplete = async () => {
     setIsOpening(false);
-    // After animation completes, sync with server
     await updateBalanceFromServer();
   };
 
@@ -55,21 +53,27 @@ function LootboxDetails() {
     console.error('Error opening box:', error);
     setIsOpening(false);
   };
-  console.log(boxDetails);
-  if (!boxDetails) return <div>Loading...</div>;
+
+  if (!boxDetails) return (
+      <div className="min-h-screen bg-gray-900 flex items-center justify-center">
+        <div className="text-white text-lg">Loading...</div>
+      </div>
+  );
 
   return (
       <div className="min-h-screen bg-gray-900 text-white">
-        <div className="max-w-6xl mx-auto p-6">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6">
+          {/* Back Button */}
           <Link
               to="/"
-              className="inline-flex items-center px-5 py-3 text-sm bg-gray-800 hover:bg-gray-700 rounded-md mb-6"
+              className="inline-flex items-center px-4 py-2 text-sm bg-gray-800 hover:bg-gray-700 rounded-md mb-6 transition-colors"
           >
             Back
           </Link>
 
-          <div className="flex flex-col items-center mb-8">
-            <div className="w-48 relative">
+          {/* Box Details Header */}
+          <div className="flex flex-col items-center mb-6 sm:mb-8">
+            <div className="w-32 sm:w-48 relative">
               <div className="absolute inset-0 bg-gradient-to-b from-yellow-500/20 to-transparent rounded-xl"></div>
               <img
                   src={boxDetails.imageUrl}
@@ -77,9 +81,10 @@ function LootboxDetails() {
                   className="w-full rounded-xl shadow-lg shadow-yellow-500/10"
               />
             </div>
-            <h1 className="text-2xl font-bold mt-4 text-center">{boxDetails.name}</h1>
+            <h1 className="text-xl sm:text-2xl font-bold mt-4 text-center">{boxDetails.name}</h1>
           </div>
 
+          {/* Lootbox Opening Section */}
           <div className="mb-4">
             <LootboxOpening
                 boxName={name}
@@ -92,40 +97,43 @@ function LootboxDetails() {
             />
           </div>
 
-          <div className="flex justify-center mb-8">
+          {/* Open Button */}
+          <div className="flex justify-center mb-6 sm:mb-8">
             <button
                 onClick={handleOpenBox}
                 disabled={isOpening || balance < boxDetails.price}
                 className={`
-          relative overflow-hidden
-          bg-yellow-500 hover:bg-yellow-600 disabled:bg-yellow-800 
-          px-4 py-2 rounded-md transition-colors
-          transform hover:scale-105 active:scale-95
-          shadow-lg shadow-yellow-500/20 text-lg text-[rgb(33,37,41)]
-        `}
+              relative overflow-hidden
+              bg-yellow-500 hover:bg-yellow-600 disabled:bg-yellow-800 
+              px-4 py-2 rounded-md transition-colors
+              transform hover:scale-105 active:scale-95
+              shadow-lg shadow-yellow-500/20 text-base sm:text-lg text-[rgb(33,37,41)]
+              w-full sm:w-auto sm:min-w-[200px]
+            `}
             >
               <div
                   className="absolute inset-0 w-[350%] h-full animate-spin"
                   style={{
                     background: `repeating-linear-gradient(
-              45deg,
-              transparent,
-              transparent 12px,
-              rgba(20, 22, 26, 0.1) 0px,
-              rgba(20, 22, 26, 0.1) 24px
-            )`,
+                  45deg,
+                  transparent,
+                  transparent 12px,
+                  rgba(20, 22, 26, 0.1) 0px,
+                  rgba(20, 22, 26, 0.1) 24px
+                )`,
                     left: '0'
                   }}
               />
               <span className="relative z-10">
-          Open for ♦ {boxDetails.price.toFixed(2)}
-        </span>
+              Open for ♦ {boxDetails.price.toFixed(2)}
+            </span>
             </button>
           </div>
 
+          {/* Potential Drops Section */}
           <div>
             <h2 className="text-lg font-bold mb-4">Potential Drops</h2>
-            <div className="grid grid-cols-5 gap-6">
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 sm:gap-4 md:gap-6">
               {items.map((item) => (
                   <div
                       key={item.id}
@@ -135,8 +143,8 @@ function LootboxDetails() {
                     <div className="relative z-10">
                       {/* Drop Rate Badge */}
                       <div className="absolute top-2 left-2 z-20">
-                        <div className="inline-block bg-black/80 px-2 py-0.5 rounded">
-                          <p className="text-yellow-500 text-[15px]">{item.dropRate}%</p>
+                        <div className="inline-block bg-black/80 px-1.5 sm:px-2 py-0.5 rounded">
+                          <p className="text-yellow-500 text-xs sm:text-sm">{item.dropRate}%</p>
                         </div>
                       </div>
 
@@ -144,8 +152,8 @@ function LootboxDetails() {
                       <div className="relative bg-black/50 w-full aspect-square">
                         {/* Price Overlay */}
                         <div className="absolute bottom-2 inset-x-0 z-20 flex justify-center">
-                          <div className="inline-block bg-black/80 px-2 py-0.5 rounded">
-                            <p className="text-yellow-500 font-bold text-[15px]">♦ {item.price.toFixed(2)}</p>
+                          <div className="inline-block bg-black/80 px-1.5 sm:px-2 py-0.5 rounded">
+                            <p className="text-yellow-500 font-bold text-xs sm:text-sm">♦ {item.price.toFixed(2)}</p>
                           </div>
                         </div>
 
@@ -153,12 +161,13 @@ function LootboxDetails() {
                             src={item.imageUrl}
                             alt={item.name}
                             className="w-full h-full object-contain p-2"
+                            loading="lazy"
                         />
                       </div>
 
                       {/* Name */}
                       <div className="text-center py-1 px-1">
-                        <p className="text-gray-300 text-sm truncate">{item.name}</p>
+                        <p className="text-gray-300 text-xs sm:text-sm truncate">{item.name}</p>
                       </div>
                     </div>
                   </div>
