@@ -3,13 +3,13 @@ package com.casino.drawn.Services.Solana;
 
 import com.casino.drawn.DTO.Solana.WithdrawRequest;
 import com.casino.drawn.DTO.Solana.WithdrawResponse;
-import com.casino.drawn.Model.Solana.SecretKeyPair;
 import com.casino.drawn.Model.Solana.WithdrawTransaction;
 import com.casino.drawn.Model.User;
 import com.casino.drawn.Repository.Solana.SecretKeyPairRepository;
 import com.casino.drawn.Repository.Solana.WithdrawTransactionsRepository;
 import com.casino.drawn.Repository.UserRepository;
 import com.casino.drawn.Services.JWT.JwtUtil;
+import org.springframework.beans.factory.annotation.Value;  // Add this import
 import org.p2p.solanaj.core.Account;
 import org.p2p.solanaj.core.PublicKey;
 import org.p2p.solanaj.core.Transaction;
@@ -18,6 +18,7 @@ import org.p2p.solanaj.rpc.*;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
+import java.util.Base64;
 
 
 @Service
@@ -27,6 +28,10 @@ public class WithdrawService {
     private final UserRepository userRepository;
     private final SolanaService solanaService;
     private final WithdrawTransactionsRepository withdrawTransactionsRepository;
+    @Value("${WITHDRAW_PRIVATE_KEY_BASE64}")
+    private String encodedPrivateKey;
+    @Value("${WITHDRAW_PUBLIC_KEY}")
+    private String fromWalletPublicKey;
 
     public WithdrawService(JwtUtil jwtUtil, UserRepository userRepository, SecretKeyPairRepository secretKeyPairRepository, SolanaService solanaService, WithdrawTransactionsRepository withdrawTransactionsRepository) {
         this.jwtUtil = jwtUtil;
@@ -35,31 +40,30 @@ public class WithdrawService {
         this.withdrawTransactionsRepository = withdrawTransactionsRepository;
     }
 
+    private byte[] getPrivateKeyBytes() {
+        return Base64.getDecoder().decode(encodedPrivateKey);
+    }
+
     public WithdrawResponse handleWithdraw(String token, WithdrawRequest request) throws RpcException {
 
-        // Verify user has valid balance and make sure they have wagered 1x their total deposit.
+        // Verify user has valid balance and make sure they have wagered 1x their total deposit (protection for money-laundering).
         User user = userRepository.findByPrimaryWalletAddress(jwtUtil.validateToken(token));
         if (user.getBalance() > request.getAmountInUSD()){
             if (user.getTotalDeposit() > user.getTotalWager()){
                 float wagerNeeded = user.getTotalDeposit() - user.getTotalWager();
                 return new WithdrawResponse("WAGER_AMOUNT_NOT_MET", "You will need to wager $" + wagerNeeded  + "USD in order to withdraw.");
             }
-            // Create Solana Transaction.
-            byte[] privateKeyBytes = new byte[] {
-                    (byte)134, (byte)2, (byte)241, (byte)204, (byte)117, (byte)55, (byte)253, (byte)164, (byte)175, (byte)129, (byte)43, (byte)2, (byte)243, (byte)71, (byte)167, (byte)177,
-                    (byte)154, (byte)160, (byte)145, (byte)187, (byte)106, (byte)54, (byte)34, (byte)226, (byte)249, (byte)115, (byte)5, (byte)132, (byte)211, (byte)105, (byte)55, (byte)134,
-                    (byte)100, (byte)56, (byte)5, (byte)86, (byte)127, (byte)152, (byte)216, (byte)46, (byte)115, (byte)166, (byte)226, (byte)93, (byte)131, (byte)168, (byte)10, (byte)144,
-                    (byte)219, (byte)28, (byte)123, (byte)114, (byte)87, (byte)148, (byte)167, (byte)49, (byte)12, (byte)29, (byte)60, (byte)230, (byte)44, (byte)2, (byte)100, (byte)94
-            };
 
+
+            // Create Solana Transaction.
 
             RpcClient client = new RpcClient(Cluster.DEVNET);
-            PublicKey fromPublicKey = new PublicKey("7kDKGKw5ebKxKjxfLPmJHk827Gk3iukq6wM52VzLMUcu");
+            PublicKey fromPublicKey = new PublicKey(fromWalletPublicKey);
             PublicKey toPublicKey = new PublicKey(request.getToWallet());
             float currentSOLPriceinUSD = solanaService.getSolanaPrice();
             float SOLAmount = request.getAmountInUSD()/currentSOLPriceinUSD;
             float lamportsAmount = SOLAmount * 1000000000;
-            Account signer = new Account(privateKeyBytes);
+            Account signer = new Account(getPrivateKeyBytes());
             Transaction transaction = new Transaction();
             transaction.addInstruction(SystemProgram.transfer(fromPublicKey, toPublicKey, (long) lamportsAmount));
 

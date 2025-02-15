@@ -6,30 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="ddb187d5-c2a8-4b9d-835a-9363af0aa293" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontEnd/build/asset-manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontEnd/build/asset-manifest.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontEnd/build/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontEnd/build/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontEnd/build/static/css/main.1b19c3b0.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontEnd/build/static/css/main.1b19c3b0.css.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontEnd/build/static/js/main.6f053ef9.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontEnd/build/static/js/main.6f053ef9.js.LICENSE.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontEnd/build/static/js/main.6f053ef9.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontEnd/frontEnd/asset-manifest.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontEnd/frontEnd/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontEnd/frontEnd/static/css/main.f1c736a1.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontEnd/frontEnd/static/css/main.f1c736a1.css.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontEnd/frontEnd/static/js/12.d29b96a3.chunk.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontEnd/frontEnd/static/js/12.d29b96a3.chunk.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontEnd/frontEnd/static/js/131.26188c93.chunk.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontEnd/frontEnd/static/js/131.26188c93.chunk.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontEnd/frontEnd/static/js/main.7e80b9d1.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontEnd/frontEnd/static/js/main.7e80b9d1.js.LICENSE.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontEnd/frontEnd/static/js/main.7e80b9d1.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontEnd/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontEnd/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontEnd/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontEnd/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontEnd/src/components/HomePage.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontEnd/src/components/HomePage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontEnd/src/components/LootboxDetails.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontEnd/src/components/LootboxDetails.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontEnd/src/components/LootboxOpening.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontEnd/src/components/LootboxOpening.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontEnd/src/components/Navbar.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontEnd/src/components/Navbar.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -85,6 +61,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "ASKED_MARK_IGNORED_FILES_AS_EXCLUDED": "true",
+    "Application.test.executor": "Run",
     "Maven.drawn [clean,install].executor": "Run",
     "Maven.drawn [clean].executor": "Run",
     "Maven.drawn [install].executor": "Run",
@@ -195,6 +172,7 @@
       <workItem from="1739501954266" duration="3804000" />
       <workItem from="1739510239854" duration="22000" />
       <workItem from="1739510274600" duration="39000" />
+      <workItem from="1739641593248" duration="1133000" />
     </task>
     <servers />
   </component>
