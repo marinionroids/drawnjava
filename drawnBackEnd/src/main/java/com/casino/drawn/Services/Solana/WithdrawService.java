@@ -44,6 +44,18 @@ public class WithdrawService {
         return Base64.getDecoder().decode(encodedPrivateKey);
     }
 
+    private boolean validWithdrawBalance(float withdrawAmount) throws RpcException {
+
+        RpcClient client = new RpcClient(Cluster.DEVNET);
+        PublicKey withdrawPublicKey = new PublicKey(fromWalletPublicKey);
+        // We get the casino's balance(lamports), turn it into SOL and then get the user request's amound(USD) turn that into SOL and compare.
+        long balanceInLamports = client.getApi().getBalance(withdrawPublicKey);
+        float balanceInSOL = (float) balanceInLamports / 1000000000;
+        float withdrawAmountInSOL = withdrawAmount / solanaService.getSolanaPrice();
+        return balanceInSOL > withdrawAmountInSOL;
+
+    }
+
     public WithdrawResponse handleWithdraw(String token, WithdrawRequest request) throws RpcException {
 
         // Verify user has valid balance and make sure they have wagered 1x their total deposit (protection for money-laundering).
@@ -53,6 +65,12 @@ public class WithdrawService {
                 float wagerNeeded = user.getTotalDeposit() - user.getTotalWager();
                 return new WithdrawResponse("WAGER_AMOUNT_NOT_MET", "You will need to wager $" + wagerNeeded  + "USD in order to withdraw.");
             }
+
+            // Checks whether the casino's address has enough funds.
+            if (!validWithdrawBalance( request.getAmountInUSD())){
+                return new WithdrawResponse("CONTACT_SUPPORT", "Not enough withdrawl funds, please contact support");
+            }
+
 
 
             // Create Solana Transaction.

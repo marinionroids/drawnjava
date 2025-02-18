@@ -23,25 +23,35 @@ public class WithdrawController {
     @PostMapping("/auth/withdraw")
     public ResponseEntity<?> withdraw(@RequestHeader("Authorization") String token, @RequestBody WithdrawRequest withdrawRequest) throws RpcException {
 
-        WithdrawResponse respone = withdrawService.handleWithdraw(token, withdrawRequest);
+        WithdrawResponse response = withdrawService.handleWithdraw(token, withdrawRequest);
 
-        if (respone.getCode() == "WAGER_AMOUNT_NOT_MET") {
+        if (response.getCode() == "WAGER_AMOUNT_NOT_MET") {
             return ResponseEntity
                     .badRequest()
                     .body(new ApiResponse(
                             false,
                             "Failed to withdraw",
-                            respone
+                            response
                     ));
         }
 
-        if (respone.getCode() == "NOT_ENOUGH_FUNDS") {
+        if (response.getCode() == "NOT_ENOUGH_FUNDS") {
             return ResponseEntity
                     .badRequest()
                     .body(new ApiResponse(
                             false,
                             "Failed to withdraw",
-                            respone
+                            response
+                    ));
+        }
+
+        if (response.getCode() == "CONTACT_SUPPORT") {
+            return ResponseEntity
+                    .badRequest()
+                    .body(new ApiResponse(
+                            false,
+                            "Something went wrong!",
+                            response
                     ));
         }
 
@@ -50,7 +60,7 @@ public class WithdrawController {
                 .body(new ApiResponse(
                         true,
                         "Withdraw Successfully",
-                        respone
+                        response
                 ));
     }
 }
