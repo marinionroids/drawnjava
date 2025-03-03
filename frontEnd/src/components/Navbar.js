@@ -13,6 +13,8 @@ const Navbar = ({
   balance = 0,
   onConnect,
   onDisconnect,
+  activeWallet, // New prop for wallet info
+  userData,
 }) => {
   const [isDepositModalOpen, setIsDepositModalOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -51,6 +53,37 @@ const Navbar = ({
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
+
+  // Helper function to get wallet display name and color
+  const getWalletDisplay = () => {
+    if (!activeWallet) return { name: "Unknown Wallet", color: "text-gray-400", bgColor: "from-gray-700 to-gray-800" };
+    
+    // Custom styling based on wallet type
+    if (activeWallet.name.toLowerCase().includes('phantom')) {
+      return {
+        name: "Phantom",
+        color: "text-purple-400",
+        bgColor: "from-purple-900 to-purple-800",
+        icon: activeWallet.icon
+      };
+    } else if (activeWallet.name.toLowerCase().includes('solflare')) {
+      return {
+        name: "Solflare",
+        color: "text-orange-400",
+        bgColor: "from-orange-900 to-orange-800",
+        icon: activeWallet.icon
+      };
+    } else {
+      return {
+        name: activeWallet.name,
+        color: "text-blue-400",
+        bgColor: "from-blue-900 to-blue-800",
+        icon: activeWallet.icon
+      };
+    }
+  };
+
+  const walletDisplay = getWalletDisplay();
 
   return (
     <>
@@ -101,6 +134,22 @@ const Navbar = ({
 
                 {isConnected ? (
                   <div className="flex items-center space-x-3">
+                    {/* Wallet Indicator Badge */}
+                    {activeWallet && (
+                      <div className={`flex items-center space-x-1 bg-gradient-to-br ${walletDisplay.bgColor} px-3 py-1 rounded-lg border border-gray-700/50`}>
+                        {walletDisplay.icon && (
+                          <img 
+                            src={walletDisplay.icon} 
+                            alt={`${walletDisplay.name} icon`} 
+                            className="w-4 h-4 mr-1" 
+                          />
+                        )}
+                        <span className={`text-xs font-medium ${walletDisplay.color}`}>
+                          {walletDisplay.name}
+                        </span>
+                      </div>
+                    )}
+                    
                     <div
                       onClick={handleProfileClick}
                       className="flex items-center space-x-3 bg-gray-800/90 rounded-xl p-2 border border-gray-700/50 cursor-pointer hover:bg-gray-700 transition-all duration-200"
@@ -162,6 +211,24 @@ const Navbar = ({
 
                 {isConnected ? (
                   <div className="space-y-3">
+                    {/* Mobile Wallet Indicator */}
+                    {activeWallet && (
+                      <div className={`flex items-center bg-gradient-to-br ${walletDisplay.bgColor} p-3 rounded-lg border border-gray-700/50`}>
+                        <div className="flex items-center space-x-2">
+                          {walletDisplay.icon && (
+                            <img 
+                              src={walletDisplay.icon} 
+                              alt={`${walletDisplay.name} icon`} 
+                              className="w-5 h-5" 
+                            />
+                          )}
+                          <span className={`font-medium ${walletDisplay.color}`}>
+                            Connected with {walletDisplay.name}
+                          </span>
+                        </div>
+                      </div>
+                    )}
+                    
                     <div
                       onClick={handleProfileClick}
                       className="bg-gray-800/90 rounded-xl p-4 border border-gray-700/50 cursor-pointer hover:bg-gray-700 transition-all duration-200"

@@ -20,6 +20,18 @@ const HandleConnect = () => {
   const [signature, setSignature] = useState(null);
   const [userData, setUserData] = useState(null);
   const [isSignedIn, setIsSignedIn] = useState(false);
+  const [activeWallet, setActiveWallet] = useState(null);
+
+  // Function to get active wallet details
+  const getWalletDetails = () => {
+    if (!wallet) return null;
+    
+    return {
+      name: wallet.adapter.name,
+      icon: wallet.adapter.icon,
+      id: wallet.adapter.name.toLowerCase().replace(/\s+/g, '-')
+    };
+  };
 
   const fetchUserData = async () => {
     try {
@@ -45,6 +57,14 @@ const HandleConnect = () => {
         updateBalance(data.balance); // Update balance in context
       }
       Cookies.set('recievingAddress', data.recievingAddress);
+      
+      // Also retrieve saved wallet info if available
+      const savedWalletId = Cookies.get('walletId');
+      if (savedWalletId && !activeWallet) {
+        // You could potentially re-select the wallet here if needed
+        console.log(`Previously used wallet: ${savedWalletId}`);
+      }
+      
       return data;
     } catch (error) {
       console.error("Error fetching user data:", error);
@@ -77,15 +97,26 @@ const HandleConnect = () => {
 
   useEffect(() => {
     setIsConnected(connected);
-    if (connected && publicKey && !userData) {
-      handleSignMessage();
+    
+    if (connected && publicKey) {
+      // Update active wallet when connected
+      const walletInfo = getWalletDetails();
+      setActiveWallet(walletInfo);
+      
+      // Log wallet info for debugging
+      console.log("Connected wallet:", walletInfo);
+      
+      if (!userData) {
+        handleSignMessage();
+      }
+    } else {
+      setActiveWallet(null);
     }
-  }, [connected, publicKey]);
-
-
+  }, [connected, publicKey, wallet]);
 
   const verifyWithBackend = async (message, signature) => {
     try {
+      const walletInfo = getWalletDetails();
       const response = await fetch("https://drawngg.com/api/auth/verify", {
         method: "POST",
         headers: {
@@ -95,6 +126,7 @@ const HandleConnect = () => {
           walletAddress: publicKey.toString(),
           message: message,
           signature: signature,
+          walletProvider: walletInfo?.name || 'unknown', // Send wallet info to backend
         }),
       });
 
@@ -105,6 +137,13 @@ const HandleConnect = () => {
       const { success, message: responseMessage, data } = await response.json();
       // Save JWT in cookies
       Cookies.set('jwt', data.token, { expires: 1 });
+      
+      // Save wallet information
+      if (walletInfo) {
+        Cookies.set('walletId', walletInfo.id, { expires: 1 });
+        Cookies.set('walletName', walletInfo.name, { expires: 1 });
+      }
+      
       setUserData(data);
       window.location.reload();
       setIsSignedIn(true);
@@ -142,17 +181,11 @@ const HandleConnect = () => {
       setUserData(null);
       setIsSignedIn(false);
 
-      if (!wallet) {
-        // First ensure Solflare is selected
-        const success = await select("Solflare");
-        if (!success) {
-          throw new Error("Failed to select wallet");
-        }
-      }
-
-      // Only try to connect after we're sure the wallet is selected
+      // Connect with the selected wallet
       if (wallet) {
         await connect();
+        
+        // Wallet information will be set in the useEffect hook when connected changes
       }
     } catch (error) {
       console.error("Connection failed:", error);
@@ -162,15 +195,19 @@ const HandleConnect = () => {
   const handleDisconnect = () => {
     disconnect();
     Cookies.remove('jwt');
+    Cookies.remove('walletId');
+    Cookies.remove('walletName');
     setUserData(null);
     setIsSignedIn(false);
     setIsConnected(false);
+    setActiveWallet(null);
     
     // Force refresh to reset UI state
     window.location.reload();
   };
 
   const username = userData?.username;
+  
   return (
       <Navbar
           isConnected={isConnected || isSignedIn}
@@ -180,6 +217,7 @@ const HandleConnect = () => {
           onConnect={handleConnect}
           onDisconnect={handleDisconnect}
           userData={userData}
+          activeWallet={activeWallet} // Pass wallet info to Navbar
       />
   );
 };
