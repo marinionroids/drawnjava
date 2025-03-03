@@ -1,6 +1,6 @@
-package com.casino.drawn.Repository.Lootbox;
+package com.casino.drawn.repository.lootbox;
 
-import com.casino.drawn.Model.Lootbox.Lootbox;
+import com.casino.drawn.model.lootbox.Lootbox;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface LootboxRepository extends JpaRepository<Lootbox, Integer> {

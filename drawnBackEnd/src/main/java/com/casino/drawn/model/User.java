@@ -1,4 +1,4 @@
-package com.casino.drawn.Model;
+package com.casino.drawn.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

@@ -1,4 +1,4 @@
-package com.casino.drawn.DTO.Solana;
+package com.casino.drawn.dto.solana;
 
 
 import lombok.AllArgsConstructor;

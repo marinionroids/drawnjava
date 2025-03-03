@@ -1,14 +1,14 @@
-package com.casino.drawn.Services.Solana;
+package com.casino.drawn.services.solana;
 
 
-import com.casino.drawn.DTO.Solana.WithdrawRequest;
-import com.casino.drawn.DTO.Solana.WithdrawResponse;
-import com.casino.drawn.Model.Solana.WithdrawTransaction;
-import com.casino.drawn.Model.User;
-import com.casino.drawn.Repository.Solana.SecretKeyPairRepository;
-import com.casino.drawn.Repository.Solana.WithdrawTransactionsRepository;
-import com.casino.drawn.Repository.UserRepository;
-import com.casino.drawn.Services.JWT.JwtUtil;
+import com.casino.drawn.dto.solana.WithdrawRequest;
+import com.casino.drawn.dto.solana.WithdrawResponse;
+import com.casino.drawn.model.solana.WithdrawTransaction;
+import com.casino.drawn.model.User;
+import com.casino.drawn.repository.solana.SecretKeyPairRepository;
+import com.casino.drawn.repository.solana.WithdrawTransactionsRepository;
+import com.casino.drawn.repository.UserRepository;
+import com.casino.drawn.services.jwt.JwtUtil;
 import org.springframework.beans.factory.annotation.Value;  // Add this import
 import org.p2p.solanaj.core.Account;
 import org.p2p.solanaj.core.PublicKey;

@@ -1,14 +1,12 @@
-package com.casino.drawn.Services;
+package com.casino.drawn.services;
 
 
-import com.casino.drawn.DTO.API.ApiResponse;
-import com.casino.drawn.DTO.API.ErrorDetails;
+import com.casino.drawn.dto.api.ErrorDetails;
 import jakarta.servlet.http.HttpServletResponse;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;

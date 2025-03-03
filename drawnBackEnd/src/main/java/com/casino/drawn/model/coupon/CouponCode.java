@@ -1,4 +1,4 @@
-package com.casino.drawn.Model.Coupon;
+package com.casino.drawn.model.coupon;
 
 
 import jakarta.persistence.*;

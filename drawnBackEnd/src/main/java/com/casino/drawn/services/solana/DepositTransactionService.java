@@ -1,11 +1,11 @@
-package com.casino.drawn.Services.Solana;
+package com.casino.drawn.services.solana;
 
 
-import com.casino.drawn.DTO.Solana.SolanaTransactionRequest;
-import com.casino.drawn.Model.Solana.DepositTransactions;
-import com.casino.drawn.Model.User;
-import com.casino.drawn.Repository.Solana.DepositTransactionsRepository;
-import com.casino.drawn.Repository.UserRepository;
+import com.casino.drawn.dto.solana.SolanaTransactionRequest;
+import com.casino.drawn.model.solana.DepositTransactions;
+import com.casino.drawn.model.User;
+import com.casino.drawn.repository.solana.DepositTransactionsRepository;
+import com.casino.drawn.repository.UserRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -61,6 +61,7 @@ public class DepositTransactionService {
         Map meta = (Map) result.get("meta");
         Map transaction = (Map) result.get("transaction");
         Map message = (Map) transaction.get("message");
+
 
         List<String> accountKeys = (List<String>) message.get("accountKeys");
         List<Long> preBalances = (List<Long>) meta.get("preBalances");

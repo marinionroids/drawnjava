@@ -1,4 +1,4 @@
-package com.casino.drawn.DTO.UserProfile;
+package com.casino.drawn.dto.userprofile;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

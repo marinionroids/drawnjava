@@ -1,16 +1,16 @@
-package com.casino.drawn.Controller.UserProfile;
+package com.casino.drawn.controller.userprofile;
 
-import com.casino.drawn.DTO.API.ApiResponse;
-import com.casino.drawn.DTO.API.ErrorDetails;
-import com.casino.drawn.DTO.Coupon.CouponRequest;
-import com.casino.drawn.Services.Coupon.CouponService;
+import com.casino.drawn.dto.api.ApiResponse;
+import com.casino.drawn.dto.api.ErrorDetails;
+import com.casino.drawn.dto.coupon.CouponRequest;
+import com.casino.drawn.services.coupon.CouponService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 
 @RestController
 @RequestMapping("/api")
-@CrossOrigin(origins = "https://drawngg.com")
+
 public class CouponController {
 
     private final CouponService couponService;

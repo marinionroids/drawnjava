@@ -1,4 +1,4 @@
-package com.casino.drawn.Model.Lootbox;
+package com.casino.drawn.model.lootbox;
 
 
 import jakarta.persistence.*;
@@ -22,7 +22,11 @@ public class LootboxOpenings {
     private int id;
     private int userId;
     private String lootboxName;
-    private String itemWon;
+
+    @ManyToOne
+    @JoinColumn(name = "item_won_id")
+    private Item itemWon;
+
     private float itemValue;
     private String transactionId;
     private Timestamp timeOpened;

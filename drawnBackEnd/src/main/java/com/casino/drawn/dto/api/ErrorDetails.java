@@ -1,4 +1,4 @@
-package com.casino.drawn.DTO.API;
+package com.casino.drawn.dto.api;
 
 
 import lombok.AllArgsConstructor;

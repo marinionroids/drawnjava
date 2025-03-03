@@ -15,5 +15,18 @@
         </introspection-scope>
       </schema-mapping>
     </data-source>
+    <data-source name="lootbox@207.246.124.198" uuid="a7f63bf1-ef2c-4b1f-91fb-fa23f3c8973d">
+      <database-info product="MariaDB" version="11.4.4-MariaDB" jdbc-version="4.2" driver-name="MariaDB Connector/J" driver-version="3.3.3" dbms="MARIADB" exact-version="11.4.4" exact-driver-version="3.3">
+        <extra-name-characters>#@</extra-name-characters>
+        <identifier-quote-string>`</identifier-quote-string>
+      </database-info>
+      <case-sensitivity plain-identifiers="exact" quoted-identifiers="exact" />
+      <user-name>marin</user-name>
+      <schema-mapping>
+        <introspection-scope>
+          <node kind="schema" qname="@" />
+        </introspection-scope>
+      </schema-mapping>
+    </data-source>
   </component>
 </project>

@@ -5,7 +5,78 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ddb187d5-c2a8-4b9d-835a-9363af0aa293" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/drawnBackEnd/src/main/java/com/casino/drawn/config/CorsConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/drawnBackEnd/src/main/java/com/casino/drawn/config/CorsConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/drawnBackEnd/src/main/java/com/casino/drawn/controller/PhotoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/drawnBackEnd/src/main/java/com/casino/drawn/controller/PhotoController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/drawnBackEnd/src/main/java/com/casino/drawn/controller/lootbox/LootboxController.java" beforeDir="false" afterPath="$PROJECT_DIR$/drawnBackEnd/src/main/java/com/casino/drawn/controller/lootbox/LootboxController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/drawnBackEnd/src/main/java/com/casino/drawn/controller/solana/SolanaController.java" beforeDir="false" afterPath="$PROJECT_DIR$/drawnBackEnd/src/main/java/com/casino/drawn/controller/solana/SolanaController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/drawnBackEnd/src/main/java/com/casino/drawn/controller/solana/WithdrawController.java" beforeDir="false" afterPath="$PROJECT_DIR$/drawnBackEnd/src/main/java/com/casino/drawn/controller/solana/WithdrawController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/drawnBackEnd/src/main/java/com/casino/drawn/controller/userprofile/CouponController.java" beforeDir="false" afterPath="$PROJECT_DIR$/drawnBackEnd/src/main/java/com/casino/drawn/controller/userprofile/CouponController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/drawnBackEnd/src/main/java/com/casino/drawn/controller/userprofile/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/drawnBackEnd/src/main/java/com/casino/drawn/controller/userprofile/LoginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/drawnBackEnd/src/main/java/com/casino/drawn/controller/userprofile/ProfileController.java" beforeDir="false" afterPath="$PROJECT_DIR$/drawnBackEnd/src/main/java/com/casino/drawn/controller/userprofile/ProfileController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/drawnBackEnd/src/main/java/com/casino/drawn/dto/api/ApiResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/drawnBackEnd/src/main/java/com/casino/drawn/dto/api/ApiResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/drawnBackEnd/src/main/java/com/casino/drawn/dto/api/ErrorDetails.java" beforeDir="false" afterPath="$PROJECT_DIR$/drawnBackEnd/src/main/java/com/casino/drawn/dto/api/ErrorDetails.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/drawnBackEnd/src/main/java/com/casino/drawn/dto/coupon/CouponRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/drawnBackEnd/src/main/java/com/casino/drawn/dto/coupon/CouponRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/drawnBackEnd/src/main/java/com/casino/drawn/dto/lootbox/DepositDetails.java" beforeDir="false" afterPath="$PROJECT_DIR$/drawnBackEnd/src/main/java/com/casino/drawn/dto/lootbox/DepositDetails.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/drawnBackEnd/src/main/java/com/casino/drawn/dto/lootbox/LatestDropResponseDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/drawnBackEnd/src/main/java/com/casino/drawn/dto/lootbox/LatestDropResponseDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/drawnBackEnd/src/main/java/com/casino/drawn/dto/lootbox/LootboxItemResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/drawnBackEnd/src/main/java/com/casino/drawn/dto/lootbox/LootboxItemResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/drawnBackEnd/src/main/java/com/casino/drawn/dto/lootbox/LootboxOpenRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/drawnBackEnd/src/main/java/com/casino/drawn/dto/lootbox/LootboxOpenRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/drawnBackEnd/src/main/java/com/casino/drawn/dto/lootbox/LootboxOpenResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/drawnBackEnd/src/main/java/com/casino/drawn/dto/lootbox/LootboxOpenResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/drawnBackEnd/src/main/java/com/casino/drawn/dto/solana/SolanaTransactionRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/drawnBackEnd/src/main/java/com/casino/drawn/dto/solana/SolanaTransactionRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/drawnBackEnd/src/main/java/com/casino/drawn/dto/solana/WalletVerificationDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/drawnBackEnd/src/main/java/com/casino/drawn/dto/solana/WalletVerificationDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/drawnBackEnd/src/main/java/com/casino/drawn/dto/solana/WithdrawRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/drawnBackEnd/src/main/java/com/casino/drawn/dto/solana/WithdrawRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/drawnBackEnd/src/main/java/com/casino/drawn/dto/solana/WithdrawResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/drawnBackEnd/src/main/java/com/casino/drawn/dto/solana/WithdrawResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/drawnBackEnd/src/main/java/com/casino/drawn/dto/userprofile/AuthResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/drawnBackEnd/src/main/java/com/casino/drawn/dto/userprofile/AuthResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/drawnBackEnd/src/main/java/com/casino/drawn/dto/userprofile/DepositTransactionDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/drawnBackEnd/src/main/java/com/casino/drawn/dto/userprofile/DepositTransactionDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/drawnBackEnd/src/main/java/com/casino/drawn/dto/userprofile/ProfileRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/drawnBackEnd/src/main/java/com/casino/drawn/dto/userprofile/ProfileRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/drawnBackEnd/src/main/java/com/casino/drawn/dto/userprofile/ProfileResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/drawnBackEnd/src/main/java/com/casino/drawn/dto/userprofile/ProfileResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/drawnBackEnd/src/main/java/com/casino/drawn/dto/userprofile/UserLootboxOpeningHistoryDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/drawnBackEnd/src/main/java/com/casino/drawn/dto/userprofile/UserLootboxOpeningHistoryDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/drawnBackEnd/src/main/java/com/casino/drawn/dto/userprofile/UserProfileResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/drawnBackEnd/src/main/java/com/casino/drawn/dto/userprofile/UserProfileResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/drawnBackEnd/src/main/java/com/casino/drawn/dto/userprofile/WithdrawTransactionDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/drawnBackEnd/src/main/java/com/casino/drawn/dto/userprofile/WithdrawTransactionDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/drawnBackEnd/src/main/java/com/casino/drawn/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/drawnBackEnd/src/main/java/com/casino/drawn/model/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/drawnBackEnd/src/main/java/com/casino/drawn/model/coupon/CouponCode.java" beforeDir="false" afterPath="$PROJECT_DIR$/drawnBackEnd/src/main/java/com/casino/drawn/model/coupon/CouponCode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/drawnBackEnd/src/main/java/com/casino/drawn/model/coupon/CouponCodeTransactions.java" beforeDir="false" afterPath="$PROJECT_DIR$/drawnBackEnd/src/main/java/com/casino/drawn/model/coupon/CouponCodeTransactions.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/drawnBackEnd/src/main/java/com/casino/drawn/model/lootbox/Item.java" beforeDir="false" afterPath="$PROJECT_DIR$/drawnBackEnd/src/main/java/com/casino/drawn/model/lootbox/Item.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/drawnBackEnd/src/main/java/com/casino/drawn/model/lootbox/Lootbox.java" beforeDir="false" afterPath="$PROJECT_DIR$/drawnBackEnd/src/main/java/com/casino/drawn/model/lootbox/Lootbox.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/drawnBackEnd/src/main/java/com/casino/drawn/model/lootbox/LootboxItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/drawnBackEnd/src/main/java/com/casino/drawn/model/lootbox/LootboxItem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/drawnBackEnd/src/main/java/com/casino/drawn/model/lootbox/LootboxOpenings.java" beforeDir="false" afterPath="$PROJECT_DIR$/drawnBackEnd/src/main/java/com/casino/drawn/model/lootbox/LootboxOpenings.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/drawnBackEnd/src/main/java/com/casino/drawn/model/solana/DepositTransactions.java" beforeDir="false" afterPath="$PROJECT_DIR$/drawnBackEnd/src/main/java/com/casino/drawn/model/solana/DepositTransactions.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/drawnBackEnd/src/main/java/com/casino/drawn/model/solana/SecretKeyPair.java" beforeDir="false" afterPath="$PROJECT_DIR$/drawnBackEnd/src/main/java/com/casino/drawn/model/solana/SecretKeyPair.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/drawnBackEnd/src/main/java/com/casino/drawn/model/solana/WithdrawTransaction.java" beforeDir="false" afterPath="$PROJECT_DIR$/drawnBackEnd/src/main/java/com/casino/drawn/model/solana/WithdrawTransaction.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/drawnBackEnd/src/main/java/com/casino/drawn/repository/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/drawnBackEnd/src/main/java/com/casino/drawn/repository/UserRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/drawnBackEnd/src/main/java/com/casino/drawn/repository/coupon/CouponCodeRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/drawnBackEnd/src/main/java/com/casino/drawn/repository/coupon/CouponCodeRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/drawnBackEnd/src/main/java/com/casino/drawn/repository/coupon/CouponCodeTransactionsRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/drawnBackEnd/src/main/java/com/casino/drawn/repository/coupon/CouponCodeTransactionsRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/drawnBackEnd/src/main/java/com/casino/drawn/repository/lootbox/ItemRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/drawnBackEnd/src/main/java/com/casino/drawn/repository/lootbox/ItemRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/drawnBackEnd/src/main/java/com/casino/drawn/repository/lootbox/LootboxItemRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/drawnBackEnd/src/main/java/com/casino/drawn/repository/lootbox/LootboxItemRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/drawnBackEnd/src/main/java/com/casino/drawn/repository/lootbox/LootboxOpeningsRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/drawnBackEnd/src/main/java/com/casino/drawn/repository/lootbox/LootboxOpeningsRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/drawnBackEnd/src/main/java/com/casino/drawn/repository/lootbox/LootboxRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/drawnBackEnd/src/main/java/com/casino/drawn/repository/lootbox/LootboxRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/drawnBackEnd/src/main/java/com/casino/drawn/repository/solana/DepositTransactionsRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/drawnBackEnd/src/main/java/com/casino/drawn/repository/solana/DepositTransactionsRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/drawnBackEnd/src/main/java/com/casino/drawn/repository/solana/SecretKeyPairRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/drawnBackEnd/src/main/java/com/casino/drawn/repository/solana/SecretKeyPairRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/drawnBackEnd/src/main/java/com/casino/drawn/repository/solana/WithdrawTransactionsRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/drawnBackEnd/src/main/java/com/casino/drawn/repository/solana/WithdrawTransactionsRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/drawnBackEnd/src/main/java/com/casino/drawn/services/PhotoDeliveryService.java" beforeDir="false" afterPath="$PROJECT_DIR$/drawnBackEnd/src/main/java/com/casino/drawn/services/PhotoDeliveryService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/drawnBackEnd/src/main/java/com/casino/drawn/services/coupon/CouponService.java" beforeDir="false" afterPath="$PROJECT_DIR$/drawnBackEnd/src/main/java/com/casino/drawn/services/coupon/CouponService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/drawnBackEnd/src/main/java/com/casino/drawn/services/jwt/JwtUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/drawnBackEnd/src/main/java/com/casino/drawn/services/jwt/JwtUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/drawnBackEnd/src/main/java/com/casino/drawn/services/lootbox/LootboxService.java" beforeDir="false" afterPath="$PROJECT_DIR$/drawnBackEnd/src/main/java/com/casino/drawn/services/lootbox/LootboxService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/drawnBackEnd/src/main/java/com/casino/drawn/services/lootbox/LootboxTransactionService.java" beforeDir="false" afterPath="$PROJECT_DIR$/drawnBackEnd/src/main/java/com/casino/drawn/services/lootbox/LootboxTransactionService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/drawnBackEnd/src/main/java/com/casino/drawn/services/profile/LoginService.java" beforeDir="false" afterPath="$PROJECT_DIR$/drawnBackEnd/src/main/java/com/casino/drawn/services/profile/LoginService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/drawnBackEnd/src/main/java/com/casino/drawn/services/profile/ProfileService.java" beforeDir="false" afterPath="$PROJECT_DIR$/drawnBackEnd/src/main/java/com/casino/drawn/services/profile/ProfileService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/drawnBackEnd/src/main/java/com/casino/drawn/services/profile/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/drawnBackEnd/src/main/java/com/casino/drawn/services/profile/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/drawnBackEnd/src/main/java/com/casino/drawn/services/profile/UserWalletService.java" beforeDir="false" afterPath="$PROJECT_DIR$/drawnBackEnd/src/main/java/com/casino/drawn/services/profile/UserWalletService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/drawnBackEnd/src/main/java/com/casino/drawn/services/solana/DepositTransactionService.java" beforeDir="false" afterPath="$PROJECT_DIR$/drawnBackEnd/src/main/java/com/casino/drawn/services/solana/DepositTransactionService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/drawnBackEnd/src/main/java/com/casino/drawn/services/solana/SolanaService.java" beforeDir="false" afterPath="$PROJECT_DIR$/drawnBackEnd/src/main/java/com/casino/drawn/services/solana/SolanaService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/drawnBackEnd/src/main/java/com/casino/drawn/services/solana/WithdrawService.java" beforeDir="false" afterPath="$PROJECT_DIR$/drawnBackEnd/src/main/java/com/casino/drawn/services/solana/WithdrawService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontEnd/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontEnd/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontEnd/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontEnd/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontEnd/src/components/DepositModal.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontEnd/src/components/DepositModal.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontEnd/src/components/HandleConnect.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontEnd/src/components/HandleConnect.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontEnd/src/components/HomePage.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontEnd/src/components/HomePage.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontEnd/src/components/LootboxDetails.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontEnd/src/components/LootboxDetails.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontEnd/src/components/LootboxOpening.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontEnd/src/components/LootboxOpening.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontEnd/src/components/Navbar.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontEnd/src/components/Navbar.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontEnd/src/components/profile.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontEnd/src/components/profile.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,7 +122,7 @@
   &quot;associatedIndex&quot;: 5
 }</component>
   <component name="ProjectId" id="2rvUdLUhkx5r9rVWXYJD7yr1ZFN" />
-  <component name="ProjectLevelVcsManager">
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
   </component>
   <component name="ProjectViewState">
@@ -77,7 +148,7 @@
     &quot;Spring Boot.DrawnApplication.executor&quot;: &quot;Run&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/Projects/drawn&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/Projects/localdrawnfrontend&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -86,7 +157,7 @@
     &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;MavenSettings&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;project.propVCSSupport.DirectoryMappings&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
   &quot;keyToStringList&quot;: {
@@ -105,6 +176,9 @@
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\Projects\drawn\drawnBackEnd\src\main\resources" />
       <recent name="D:\Projects\drawn\drawnBackEnd\src\main\resources\photos" />
+    </key>
+    <key name="ExtractSuperBase.RECENT_KEYS">
+      <recent name="com.casino.drawn.Config" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="com.casino.drawn.DTO" />
@@ -178,7 +252,20 @@
       <workItem from="1739765526397" duration="1067000" />
       <workItem from="1739767075463" duration="486000" />
       <workItem from="1739822905103" duration="1804000" />
-      <workItem from="1739841624645" duration="737000" />
+      <workItem from="1739841624645" duration="1038000" />
+      <workItem from="1739844949198" duration="1749000" />
+      <workItem from="1739935609076" duration="2276000" />
+      <workItem from="1740076671337" duration="2981000" />
+      <workItem from="1740089390880" duration="681000" />
+      <workItem from="1740092651677" duration="2515000" />
+      <workItem from="1740096839281" duration="3885000" />
+      <workItem from="1740115237956" duration="1221000" />
+      <workItem from="1740157489421" duration="2328000" />
+      <workItem from="1740164305340" duration="609000" />
+      <workItem from="1740203613006" duration="609000" />
+      <workItem from="1740359242831" duration="2000" />
+      <workItem from="1740432328586" duration="4952000" />
+      <workItem from="1740956321064" duration="10335000" />
     </task>
     <servers />
   </component>
@@ -195,6 +282,11 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <ignored-roots>
+      <path value="$PROJECT_DIR$/drawnBackEnd" />
+    </ignored-roots>
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

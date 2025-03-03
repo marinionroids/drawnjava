@@ -1,4 +1,4 @@
-package com.casino.drawn.Model.Lootbox;
+package com.casino.drawn.model.lootbox;
 
 
 import jakarta.persistence.*;

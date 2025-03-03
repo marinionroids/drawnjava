@@ -1,11 +1,11 @@
-package com.casino.drawn.Services.Profile;
+package com.casino.drawn.services.profile;
 
 
-import com.casino.drawn.Model.Solana.SecretKeyPair;
-import com.casino.drawn.Model.User;
-import com.casino.drawn.Repository.Solana.SecretKeyPairRepository;
-import com.casino.drawn.Repository.UserRepository;
-import com.casino.drawn.Services.Solana.SolanaService;
+import com.casino.drawn.model.solana.SecretKeyPair;
+import com.casino.drawn.model.User;
+import com.casino.drawn.repository.solana.SecretKeyPairRepository;
+import com.casino.drawn.repository.UserRepository;
+import com.casino.drawn.services.solana.SolanaService;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;

@@ -48,7 +48,6 @@ const HandleConnect = () => {
       return data;
     } catch (error) {
       console.error("Error fetching user data:", error);
-      Cookies.remove('jwt');
       setIsSignedIn(false);
       setUserData(null);
       return null;
@@ -56,6 +55,11 @@ const HandleConnect = () => {
   };
 
   useEffect(() => {
+    // Reset wallet selection on page load if not connected
+    if (!connected && wallet) {
+      disconnect();
+    }
+    
     const initializeUser = async () => {
       const savedJwt = Cookies.get('jwt');
 
@@ -78,36 +82,7 @@ const HandleConnect = () => {
     }
   }, [connected, publicKey]);
 
-  // Add this function in HandleConnect.jsx after handleDisconnect
-  const handleTestUser = async () => {
-    try {
-      const response = await fetch("https://drawngg.com/api/auth/verify", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          walletAddress: "AX2nzQy66m9MrrzezaGnt6c84Cm7GwtJb3GAapczXvwN",
-          message: "Welcome to Lootbox!",
-          signature: "5mcAQuvLRUyD5rNHSZgkSif4tyKfyKEgVZF8YdikVfjProUHbpya6KaJiZ8Kc6QXKrxP3BiTdByoAFNiaZRSVE8p"
-        }),
-      });
 
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-
-      const { data } = await response.json();
-      // Save JWT in cookies
-      Cookies.set('jwt', data.token, { expires: 1 });
-      setUserData(data);
-      setIsSignedIn(true);
-      window.location.reload();
-    } catch (error) {
-      console.error("Test user auth failed:", error);
-      alert(`Error authenticating test user: ${error.message}`);
-    }
-  };
 
   const verifyWithBackend = async (message, signature) => {
     try {
@@ -190,6 +165,9 @@ const HandleConnect = () => {
     setUserData(null);
     setIsSignedIn(false);
     setIsConnected(false);
+    
+    // Force refresh to reset UI state
+    window.location.reload();
   };
 
   const username = userData?.username;
@@ -201,7 +179,6 @@ const HandleConnect = () => {
           level={"GAMBLER"}
           onConnect={handleConnect}
           onDisconnect={handleDisconnect}
-          onTestUser={handleTestUser}  // Add this line
           userData={userData}
       />
   );

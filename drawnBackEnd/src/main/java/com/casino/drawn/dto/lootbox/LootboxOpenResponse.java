@@ -1,6 +1,6 @@
-package com.casino.drawn.DTO.Lootbox;
+package com.casino.drawn.dto.lootbox;
 
-import com.casino.drawn.Model.Lootbox.Item;
+import com.casino.drawn.model.lootbox.Item;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

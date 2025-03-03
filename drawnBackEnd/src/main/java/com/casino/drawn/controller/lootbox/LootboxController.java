@@ -1,17 +1,16 @@
-package com.casino.drawn.Controller.Lootbox;
+package com.casino.drawn.controller.lootbox;
 
-import com.casino.drawn.DTO.API.ApiResponse;
-import com.casino.drawn.DTO.API.ErrorDetails;
-import com.casino.drawn.DTO.Lootbox.LootboxItemResponse;
-import com.casino.drawn.DTO.Lootbox.LootboxOpenRequest;
-import com.casino.drawn.Model.Lootbox.Item;
-import com.casino.drawn.Model.Lootbox.Lootbox;
-import com.casino.drawn.Repository.Lootbox.LootboxRepository;
-import com.casino.drawn.Repository.UserRepository;
-import com.casino.drawn.Services.Profile.UserService;
-import com.casino.drawn.Services.JWT.JwtUtil;
-import com.casino.drawn.Services.Lootbox.LootboxService;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.casino.drawn.dto.api.ApiResponse;
+import com.casino.drawn.dto.api.ErrorDetails;
+import com.casino.drawn.dto.lootbox.LootboxItemResponse;
+import com.casino.drawn.dto.lootbox.LootboxOpenRequest;
+import com.casino.drawn.model.lootbox.Lootbox;
+import com.casino.drawn.repository.lootbox.LootboxRepository;
+import com.casino.drawn.repository.UserRepository;
+import com.casino.drawn.services.profile.UserService;
+import com.casino.drawn.services.jwt.JwtUtil;
+import com.casino.drawn.services.lootbox.LootboxService;
+import com.google.protobuf.Api;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,7 +19,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api")
-@CrossOrigin(origins = "https://drawngg.com")
+
 public class LootboxController {
 
     private final LootboxService lootboxService;
@@ -37,6 +36,12 @@ public class LootboxController {
         this.lootboxRepository = lootboxRepository;
     }
 
+
+    @GetMapping("/latestdrops")
+    public ResponseEntity<?> latestDrops() {
+        ApiResponse response = lootboxService.latestdrops();
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
 
     @GetMapping("/lootbox/{lootboxName}/items")
     public List<LootboxItemResponse> getLootboxItems(@PathVariable String lootboxName) {

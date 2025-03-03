@@ -1,7 +1,7 @@
-package com.casino.drawn.Model.Solana;
+package com.casino.drawn.model.solana;
 
 
-import com.casino.drawn.Model.User;
+import com.casino.drawn.model.User;
 import jakarta.persistence.*;
 import lombok.*;
 

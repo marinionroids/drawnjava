@@ -1,14 +1,14 @@
-package com.casino.drawn.Services.Coupon;
+package com.casino.drawn.services.coupon;
 
-import com.casino.drawn.DTO.API.ErrorDetails;
-import com.casino.drawn.DTO.Coupon.CouponRequest;
-import com.casino.drawn.Model.Coupon.CouponCode;
-import com.casino.drawn.Model.Coupon.CouponCodeTransactions;
-import com.casino.drawn.Model.User;
-import com.casino.drawn.Repository.Coupon.CouponCodeRepository;
-import com.casino.drawn.Repository.Coupon.CouponCodeTransactionsRepository;
-import com.casino.drawn.Repository.UserRepository;
-import com.casino.drawn.Services.JWT.JwtUtil;
+import com.casino.drawn.dto.api.ErrorDetails;
+import com.casino.drawn.dto.coupon.CouponRequest;
+import com.casino.drawn.model.coupon.CouponCode;
+import com.casino.drawn.model.coupon.CouponCodeTransactions;
+import com.casino.drawn.model.User;
+import com.casino.drawn.repository.coupon.CouponCodeRepository;
+import com.casino.drawn.repository.coupon.CouponCodeTransactionsRepository;
+import com.casino.drawn.repository.UserRepository;
+import com.casino.drawn.services.jwt.JwtUtil;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;

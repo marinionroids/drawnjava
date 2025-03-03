@@ -1,12 +1,12 @@
-package com.casino.drawn.Controller.UserProfile;
+package com.casino.drawn.controller.userprofile;
 
-import com.casino.drawn.DTO.API.ApiResponse;
-import com.casino.drawn.DTO.API.ErrorDetails;
-import com.casino.drawn.DTO.Solana.WalletVerificationDTO;
-import com.casino.drawn.DTO.UserProfile.AuthResponse;
-import com.casino.drawn.Services.JWT.JwtUtil;
-import com.casino.drawn.Services.Profile.LoginService;
-import com.casino.drawn.Services.Profile.UserWalletService;
+import com.casino.drawn.dto.api.ApiResponse;
+import com.casino.drawn.dto.api.ErrorDetails;
+import com.casino.drawn.dto.solana.WalletVerificationDTO;
+import com.casino.drawn.dto.userprofile.AuthResponse;
+import com.casino.drawn.services.jwt.JwtUtil;
+import com.casino.drawn.services.profile.LoginService;
+import com.casino.drawn.services.profile.UserWalletService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api")
-@CrossOrigin(origins = "https://drawngg.com")
+
 public class LoginController {
 
     private final LoginService loginService;

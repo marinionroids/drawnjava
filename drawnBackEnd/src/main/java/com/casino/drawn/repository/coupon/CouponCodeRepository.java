@@ -1,6 +1,6 @@
-package com.casino.drawn.Repository.Coupon;
+package com.casino.drawn.repository.coupon;
 
-import com.casino.drawn.Model.Coupon.CouponCode;
+import com.casino.drawn.model.coupon.CouponCode;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface CouponCodeRepository extends JpaRepository<CouponCode, Integer> {

@@ -8,7 +8,8 @@ const LootboxOpening = ({
                           onComplete,
                           onError,
                           getRarityColor,
-                          getRarityBorder
+                          getRarityBorder,
+                          serverResponse
                         }) => {
   const [sequence, setSequence] = useState([]);
   const [animationStyles, setAnimationStyles] = useState({
@@ -17,6 +18,7 @@ const LootboxOpening = ({
   const [hasLanded, setHasLanded] = useState(false);
   const [currentOffset, setCurrentOffset] = useState(null);
   const containerRef = useRef(null);
+  const animationFrameRef = useRef(null);
 
   // Updated breakpoints and sizes
   const getItemWidth = () => {
@@ -28,8 +30,8 @@ const LootboxOpening = ({
 
   const getWinPosition = () => {
     if (typeof window === 'undefined') return 47;
-    if (window.innerWidth < 640) return 42; // Adjusted for mobile
-    if (window.innerWidth < 768) return 44; // Adjusted for tablet
+    if (window.innerWidth < 640) return 42;
+    if (window.innerWidth < 768) return 44;
     return 47;
   };
 
@@ -37,7 +39,15 @@ const LootboxOpening = ({
   const WIN_POSITION = getWinPosition();
   const CENTER_POSITION = WIN_POSITION * ITEM_WIDTH;
 
-  // Rest of the state management code remains the same...
+  // Cleanup animation frame on unmount
+  useEffect(() => {
+    return () => {
+      if (animationFrameRef.current) {
+        cancelAnimationFrame(animationFrameRef.current);
+      }
+    };
+  }, []);
+
   useEffect(() => {
     if (items.length > 0) {
       const initialSequence = Array(60)
@@ -60,7 +70,6 @@ const LootboxOpening = ({
       }
     };
 
-    // Only add resize listener if we have a final position
     if (finalPositionRef.current !== null) {
       window.addEventListener('resize', handleZoomChange);
       return () => window.removeEventListener('resize', handleZoomChange);
@@ -68,13 +77,13 @@ const LootboxOpening = ({
   }, []);
 
   useEffect(() => {
-    if (!isOpening) {
+    if (!isOpening || !serverResponse) {
       setHasLanded(false);
       setCurrentOffset(null);
       return;
     }
 
-    const openBox = async () => {
+    const startAnimation = async () => {
       try {
         setHasLanded(false);
         setAnimationStyles({
@@ -82,27 +91,12 @@ const LootboxOpening = ({
           transition: 'none'
         });
 
-        await new Promise(resolve => setTimeout(resolve, 50));
-
-        const response = await fetch(`https://drawngg.com/api/lootbox/open`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': Cookies.get("jwt")
-          },
-          body: JSON.stringify({
-            transactionId: "randomnow",
-            lootboxName: boxName,
-            recievingWalletAddress: Cookies.get("recievingAddress"),
-          })
+        // Wait for next frame to ensure initial position is set
+        await new Promise(resolve => {
+          animationFrameRef.current = requestAnimationFrame(resolve);
         });
 
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-
-        const { success, message, data } = await response.json();
-        const { item } = data;
+        const { item } = serverResponse;
 
         const newSequence = Array(55)
             .fill(null)
@@ -111,25 +105,23 @@ const LootboxOpening = ({
         newSequence[WIN_POSITION] = item;
         setSequence(newSequence);
 
-        await new Promise(resolve => requestAnimationFrame(resolve));
+        // Wait for sequence update
+        await new Promise(resolve => {
+          animationFrameRef.current = requestAnimationFrame(resolve);
+        });
 
         const containerWidth = containerRef.current?.offsetWidth || 0;
         const containerCenter = containerWidth / 2;
 
-        // Calculate the final position first
         const isMobile = window.innerWidth < 640;
         const isTablet = window.innerWidth >= 640 && window.innerWidth < 768;
 
-        // Start position calculation (further left for longer animation)
         const startOffset = CENTER_POSITION - (ITEM_WIDTH * 25);
-
-        // Calculate where we want to end up
         const currentPosition = CENTER_POSITION - startOffset;
         const itemCenter = currentPosition + (ITEM_WIDTH / 2);
 
         let adjustment;
         if (isMobile) {
-          // Mobile devices: align with left edge of the winning item
           adjustment = containerCenter - itemCenter;
         } else if (isTablet) {
           adjustment = containerCenter - itemCenter + (ITEM_WIDTH * 0.25);
@@ -137,8 +129,8 @@ const LootboxOpening = ({
           adjustment = containerCenter - itemCenter - (ITEM_WIDTH / 8);
         }
 
-        const initialLandingPosition = startOffset - adjustment + (Math.random() - 0.5) * 2 * 55 ;
-        finalPositionRef.current = initialLandingPosition; // Store for resize handling
+        const initialLandingPosition = startOffset - adjustment + (Math.random() - 0.5) * 2 * 55;
+        finalPositionRef.current = initialLandingPosition;
 
         // Set initial position without animation
         setAnimationStyles({
@@ -146,59 +138,48 @@ const LootboxOpening = ({
           transition: 'none'
         });
 
-        // Start the animation after a brief delay
-        setTimeout(() => {
-          setAnimationStyles({
-            transform: `translateX(-${initialLandingPosition}px)`,
-            transition: 'transform 4s cubic-bezier(0.15, 0.45, 0.28, 1)'
-          });
+        // Wait for position update
+        await new Promise(resolve => {
+          animationFrameRef.current = requestAnimationFrame(resolve);
+        });
 
-          // Set up the second animation for desktop/tablet
-          setTimeout(() => {
-            setHasLanded(true);
+        // Start the main animation
+        setAnimationStyles({
+          transform: `translateX(-${initialLandingPosition}px)`,
+          transition: 'transform 4s cubic-bezier(0.15, 0.45, 0.28, 1)'
+        });
 
-            if (!isMobile) {
-              // For desktop/tablet: calculate center position
-              const finalCenter = containerCenter - itemCenter - 20;
-              const finalPosition = startOffset - finalCenter;
-              finalPositionRef.current = finalPosition; // Update final position for resize handling
-
-              setAnimationStyles({
-                transform: `translateX(-${finalPosition}px)`,
-                transition: 'transform 0.5s ease-out'
-              });
-            }
-
-            if (onComplete) {
-              onComplete(data);
-            }
-          }, 4000);
-        }, 100);
-
+        // Set up the final animation
         setTimeout(() => {
           setHasLanded(true);
 
-          // No need for additional movement after initial landing
-          setHasLanded(true);
-          if (onComplete) {
-            onComplete(data);
+          if (!isMobile) {
+            const finalCenter = containerCenter - itemCenter - 20;
+            const finalPosition = startOffset - finalCenter;
+            finalPositionRef.current = finalPosition;
+
+            setAnimationStyles({
+              transform: `translateX(-${finalPosition}px)`,
+              transition: 'transform 0.5s ease-out'
+            });
           }
 
+          // Call onComplete after all animations
           if (onComplete) {
-            onComplete(data);
+            onComplete(serverResponse);
           }
-        }, 5000);
+        }, 4000);
 
       } catch (error) {
-        console.error('Error opening lootbox:', error);
+        console.error('Error in animation sequence:', error);
         if (onError) {
           onError(error);
         }
       }
     };
 
-    openBox();
-  }, [isOpening, boxName, items, onComplete, onError, ITEM_WIDTH, CENTER_POSITION, WIN_POSITION]);
+    startAnimation();
+  }, [isOpening, serverResponse, items, onComplete, onError, ITEM_WIDTH, CENTER_POSITION, WIN_POSITION]);
 
   return (
       <div

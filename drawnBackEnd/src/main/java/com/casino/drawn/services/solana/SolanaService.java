@@ -1,8 +1,8 @@
-package com.casino.drawn.Services.Solana;
+package com.casino.drawn.services.solana;
 
 
-import com.casino.drawn.Model.Solana.SecretKeyPair;
-import com.casino.drawn.Repository.Solana.SecretKeyPairRepository;
+import com.casino.drawn.model.solana.SecretKeyPair;
+import com.casino.drawn.repository.solana.SecretKeyPairRepository;
 import org.p2p.solanaj.core.Account;
 import org.p2p.solanaj.rpc.RpcClient;
 import org.springframework.stereotype.Service;

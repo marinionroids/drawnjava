@@ -1,4 +1,4 @@
-package com.casino.drawn.DTO.Coupon;
+package com.casino.drawn.dto.coupon;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

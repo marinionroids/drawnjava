@@ -1,23 +1,18 @@
-package com.casino.drawn.Controller;
+package com.casino.drawn.controller;
 
 
-import com.casino.drawn.DTO.API.ApiResponse;
-import com.casino.drawn.DTO.API.ErrorDetails;
-import com.casino.drawn.Services.PhotoDeliveryService;
+import com.casino.drawn.dto.api.ApiResponse;
+import com.casino.drawn.dto.api.ErrorDetails;
+import com.casino.drawn.services.PhotoDeliveryService;
 import jakarta.servlet.http.HttpServletResponse;
-import org.apache.tomcat.util.http.fileupload.IOUtils;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.Resource;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.Objects;
 
 @RestController
 @RequestMapping("/api")
-@CrossOrigin(origins = "https://drawngg.com")
+
 public class PhotoController {
 
     private final PhotoDeliveryService photoDeliveryService;

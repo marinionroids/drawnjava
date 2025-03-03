@@ -1,11 +1,11 @@
-package com.casino.drawn.Services.Lootbox;
+package com.casino.drawn.services.lootbox;
 
-import com.casino.drawn.DTO.Lootbox.LootboxOpenRequest;
-import com.casino.drawn.Model.Lootbox.Item;
-import com.casino.drawn.Model.Lootbox.LootboxOpenings;
-import com.casino.drawn.Model.User;
-import com.casino.drawn.Repository.Lootbox.LootboxOpeningsRepository;
-import com.casino.drawn.Repository.UserRepository;
+import com.casino.drawn.dto.lootbox.LootboxOpenRequest;
+import com.casino.drawn.model.lootbox.Item;
+import com.casino.drawn.model.lootbox.LootboxOpenings;
+import com.casino.drawn.model.User;
+import com.casino.drawn.repository.lootbox.LootboxOpeningsRepository;
+import com.casino.drawn.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,7 +28,7 @@ public class LootboxTransactionService {
         Timestamp timestamp = new Timestamp(new Date().getTime());
 
         lootboxOpenings.setItemValue(item.getPrice());
-        lootboxOpenings.setItemWon(item.getName());
+        lootboxOpenings.setItemWon(item);
         lootboxOpenings.setLootboxName(lootboxOpenRequest.getLootboxName());
         lootboxOpenings.setTransactionId(lootboxOpenRequest.getTransactionId());
         lootboxOpenings.setTimeOpened(timestamp);

@@ -1,7 +1,6 @@
-package com.casino.drawn.DTO.Solana;
+package com.casino.drawn.dto.solana;
 
 
-import jakarta.persistence.Entity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

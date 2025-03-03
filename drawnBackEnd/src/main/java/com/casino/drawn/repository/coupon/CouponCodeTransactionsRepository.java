@@ -1,7 +1,7 @@
-package com.casino.drawn.Repository.Coupon;
+package com.casino.drawn.repository.coupon;
 
-import com.casino.drawn.Model.Coupon.CouponCodeTransactions;
-import com.casino.drawn.Model.User;
+import com.casino.drawn.model.coupon.CouponCodeTransactions;
+import com.casino.drawn.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

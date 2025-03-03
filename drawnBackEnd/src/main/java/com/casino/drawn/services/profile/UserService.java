@@ -1,13 +1,14 @@
-package com.casino.drawn.Services.Profile;
+package com.casino.drawn.services.profile;
 
 
 
-import com.casino.drawn.DTO.UserProfile.ProfileResponse;
-import com.casino.drawn.DTO.UserProfile.ProfileRequest;
-import com.casino.drawn.DTO.UserProfile.UserProfileResponse;
-import com.casino.drawn.Model.User;
-import com.casino.drawn.Repository.UserRepository;
-import com.casino.drawn.Services.JWT.JwtUtil;
+import com.casino.drawn.dto.api.ApiResponse;
+import com.casino.drawn.dto.userprofile.ProfileResponse;
+import com.casino.drawn.dto.userprofile.ProfileRequest;
+import com.casino.drawn.dto.userprofile.UserProfileResponse;
+import com.casino.drawn.model.User;
+import com.casino.drawn.repository.UserRepository;
+import com.casino.drawn.services.jwt.JwtUtil;
 import org.springframework.stereotype.Service;
 import java.util.Objects;
 
@@ -45,19 +46,19 @@ public class UserService {
 
     }
 
-    public ProfileResponse changeProfileData(String token, ProfileRequest profileRequest) {
+    public ApiResponse changeProfileData(String token, ProfileRequest profileRequest) {
         User user = userRepository.findByPrimaryWalletAddress(jwtUtil.validateToken(token));
         String cleanUsername = cleanUsername(profileRequest.getUsername());
         if (user != null) {
             // Check whether the username already exists and ITS NOT THIS USER.
             if (userRepository.existsByUsername(cleanUsername) && !Objects.equals(user.getUsername(), cleanUsername)) {
-                return new ProfileResponse("USERNAME_EXISTS","Username Already Exists");
+                return new ApiResponse(false, "USERNAME_EXISTS",null);
             }
             user.setUsername(cleanUsername);
             userRepository.save(user);
-            return new ProfileResponse("USERNAME_UPDATED","Profile Updated");
+            return new ApiResponse(true, "USERNAME_UPDATED",null);
         }
-        return new ProfileResponse("INVALID_TOKEN","Authentication Failed");
+        return new ApiResponse(false, "INVALID_TOKEN",null);
     }
 
 

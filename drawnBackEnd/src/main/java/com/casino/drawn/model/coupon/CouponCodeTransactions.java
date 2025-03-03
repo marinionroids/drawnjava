@@ -1,7 +1,7 @@
-package com.casino.drawn.Model.Coupon;
+package com.casino.drawn.model.coupon;
 
 
-import com.casino.drawn.Model.User;
+import com.casino.drawn.model.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

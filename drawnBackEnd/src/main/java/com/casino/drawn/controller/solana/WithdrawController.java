@@ -1,17 +1,17 @@
-package com.casino.drawn.Controller.Solana;
+package com.casino.drawn.controller.solana;
 
 
-import com.casino.drawn.DTO.API.ApiResponse;
-import com.casino.drawn.DTO.Solana.WithdrawRequest;
-import com.casino.drawn.DTO.Solana.WithdrawResponse;
-import com.casino.drawn.Services.Solana.WithdrawService;
+import com.casino.drawn.dto.api.ApiResponse;
+import com.casino.drawn.dto.solana.WithdrawRequest;
+import com.casino.drawn.dto.solana.WithdrawResponse;
+import com.casino.drawn.services.solana.WithdrawService;
 import org.p2p.solanaj.rpc.RpcException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api")
-@CrossOrigin(origins = "https://drawngg.com")
+
 public class WithdrawController {
 
     private final WithdrawService withdrawService;

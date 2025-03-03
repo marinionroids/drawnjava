@@ -1,21 +1,27 @@
-package com.casino.drawn.Services.Lootbox;
+package com.casino.drawn.services.lootbox;
 
-import com.casino.drawn.DTO.Lootbox.LootboxItemResponse;
-import com.casino.drawn.DTO.Lootbox.LootboxOpenRequest;
-import com.casino.drawn.DTO.Lootbox.LootboxOpenResponse;
-import com.casino.drawn.Model.Lootbox.Item;
-import com.casino.drawn.Model.Lootbox.Lootbox;
-import com.casino.drawn.Model.Lootbox.LootboxItem;
-import com.casino.drawn.Model.User;
-import com.casino.drawn.Repository.Lootbox.LootboxItemRepository;
-import com.casino.drawn.Repository.Lootbox.LootboxOpeningsRepository;
-import com.casino.drawn.Repository.Lootbox.LootboxRepository;
-import com.casino.drawn.Repository.UserRepository;
-import com.casino.drawn.Services.JWT.JwtUtil;
-import com.casino.drawn.Services.Profile.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.casino.drawn.dto.api.ApiResponse;
+import com.casino.drawn.dto.lootbox.LatestDropResponseDTO;
+import com.casino.drawn.dto.lootbox.LootboxItemResponse;
+import com.casino.drawn.dto.lootbox.LootboxOpenRequest;
+import com.casino.drawn.dto.lootbox.LootboxOpenResponse;
+import com.casino.drawn.model.lootbox.Item;
+import com.casino.drawn.model.lootbox.Lootbox;
+import com.casino.drawn.model.lootbox.LootboxItem;
+import com.casino.drawn.model.User;
+import com.casino.drawn.model.lootbox.LootboxOpenings;
+import com.casino.drawn.repository.lootbox.ItemRepository;
+import com.casino.drawn.repository.lootbox.LootboxItemRepository;
+import com.casino.drawn.repository.lootbox.LootboxOpeningsRepository;
+import com.casino.drawn.repository.lootbox.LootboxRepository;
+import com.casino.drawn.repository.UserRepository;
+import com.casino.drawn.services.jwt.JwtUtil;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import java.util.Random;
@@ -29,13 +35,17 @@ public class  LootboxService {
     private final LootboxTransactionService lootboxTransactionService;
     private final UserRepository userRepository;
     private final JwtUtil jwtUtil;
+    private final LootboxOpeningsRepository lootboxOpeningsRepository;
+    private final ItemRepository itemRepository;
 
-    public LootboxService(LootboxRepository lootboxRepository, LootboxItemRepository lootboxItemRepository, LootboxTransactionService lootboxTransactionService, UserRepository userRepository, JwtUtil jwtUtil) {
+    public LootboxService(LootboxRepository lootboxRepository, LootboxItemRepository lootboxItemRepository, LootboxTransactionService lootboxTransactionService, UserRepository userRepository, JwtUtil jwtUtil, LootboxOpeningsRepository lootboxOpeningsRepository, ItemRepository itemRepository) {
         this.lootboxRepository = lootboxRepository;
         this.lootboxItemRepository = lootboxItemRepository;
         this.lootboxTransactionService = lootboxTransactionService;
         this.userRepository = userRepository;
         this.jwtUtil = jwtUtil;
+        this.lootboxOpeningsRepository = lootboxOpeningsRepository;
+        this.itemRepository = itemRepository;
     }
 
 
@@ -102,6 +112,23 @@ public class  LootboxService {
         //!!!!!!!!!!!!!!!!!!!!!!!!!! CHANGE THE API RESPONSES HERE ON THIS METHOD
 
 
+    }
+
+
+    public ApiResponse latestdrops() {
+        List<LatestDropResponseDTO> latestDrops = new ArrayList<>();
+        List<LootboxOpenings> lootboxOpenings = lootboxOpeningsRepository.findTop15ByOrderByTimeOpenedDesc();
+
+        for (LootboxOpenings lootboxOpening : lootboxOpenings) {
+            LatestDropResponseDTO latestDrop = new LatestDropResponseDTO();
+            latestDrop.setItemUrl(lootboxOpening.getItemWon().getImageUrl());
+            latestDrop.setUsername(userRepository.findByUserId(lootboxOpening.getUserId()).getUsername());
+            latestDrop.setItemName(lootboxOpening.getItemWon().getName());
+            latestDrop.setValue(lootboxOpening.getItemValue());
+            latestDrops.add(latestDrop);
+        }
+
+        return new ApiResponse(true, "LATEST_DROPS", latestDrops);
     }
 
 }

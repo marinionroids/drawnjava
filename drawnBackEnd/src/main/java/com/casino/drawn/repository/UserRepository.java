@@ -1,7 +1,7 @@
-package com.casino.drawn.Repository;
+package com.casino.drawn.repository;
 
 
-import com.casino.drawn.Model.User;
+import com.casino.drawn.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

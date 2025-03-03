@@ -1,9 +1,9 @@
-package com.casino.drawn.Services.Profile;
+package com.casino.drawn.services.profile;
 
 
-import com.casino.drawn.DTO.Solana.WalletVerificationDTO;
-import com.casino.drawn.Model.User;
-import com.casino.drawn.Repository.UserRepository;
+import com.casino.drawn.dto.solana.WalletVerificationDTO;
+import com.casino.drawn.model.User;
+import com.casino.drawn.repository.UserRepository;
 import org.sol4k.Base58;
 import org.sol4k.PublicKey;
 import org.springframework.stereotype.Service;
@@ -33,9 +33,9 @@ public class LoginService {
         } catch (Exception e) {
             return false;
         }
-
-
     }
+
+
 
     public void logUserLogin(String walletAddress){
         // Logs the user last login by upating the database
