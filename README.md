@@ -1,7 +1,6 @@
 # drawnjava
 Lootbox Casino with SpringBoot Java BackEnd API and integrated Solana(SOLFLARE) DEVNET blockchain wallet connection/transactions.
 
-https://drawngg.com
 
 ![image](https://github.com/user-attachments/assets/da0fca4e-6190-4763-8853-4cb13e28dd99)
 
