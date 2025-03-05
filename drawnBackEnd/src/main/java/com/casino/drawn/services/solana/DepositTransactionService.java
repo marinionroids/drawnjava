@@ -6,8 +6,10 @@ import com.casino.drawn.model.solana.DepositTransactions;
 import com.casino.drawn.model.User;
 import com.casino.drawn.repository.solana.DepositTransactionsRepository;
 import com.casino.drawn.repository.UserRepository;
+import com.casino.drawn.services.discord.DiscordService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 
 import java.sql.Timestamp;
@@ -20,15 +22,19 @@ public class DepositTransactionService {
     private final UserRepository userRepository;
     private final SolanaService solanaService;
     private final DepositTransactionsRepository depositTransactionsRepository;
+    private final DiscordService discordService;
 
-    public DepositTransactionService(UserRepository userRepository, SolanaService solanaService, DepositTransactionsRepository depositTransactionsRepository) {
+    public DepositTransactionService(UserRepository userRepository, SolanaService solanaService, DepositTransactionsRepository depositTransactionsRepository, DiscordService discordService) {
         this.userRepository = userRepository;
         this.solanaService = solanaService;
         this.depositTransactionsRepository = depositTransactionsRepository;
+        this.discordService = discordService;
     }
 
+
+    @Transactional
     public boolean verifyDeposit(SolanaTransactionRequest solanaTransactionRequest) {
-        String SOLANA_DEVNET_URL = "https://api.devnet.solana.com";
+        String SOLANA_MAINNET_URL = "https://api.mainnet-beta.solana.com";
         float lamportsPerSol = 1000000000f;
 
         RestTemplate restTemplate = new RestTemplate();
@@ -45,7 +51,7 @@ public class DepositTransactionService {
         ResponseEntity<Map> response;
         while(true){
             try{
-                response = restTemplate.postForEntity(SOLANA_DEVNET_URL, requestBody, Map.class);
+                response = restTemplate.postForEntity(SOLANA_MAINNET_URL, requestBody, Map.class);
                 if (response.getBody().get("result") == null){
                     return false;
                 }
@@ -77,6 +83,7 @@ public class DepositTransactionService {
         boolean finalResult = (Math.abs(primaryAmount - amount1) <= 0.0002f || Math.abs(amount1 - primaryAmount) <= 0.0002f) && recieverWalletAddress.equals(solanaTransactionRequest.getRecieverWalletAddress());
 
         if(finalResult){
+            System.out.println(accountKeys.get(1));
             // Update user's balance and totalDeposit
             User user = userRepository.findByRecieverAddress(solanaTransactionRequest.getRecieverWalletAddress());
             Float depositAmount = solanaTransactionRequest.getAmount() * solanaService.getSolanaPrice();
@@ -93,6 +100,7 @@ public class DepositTransactionService {
             depositData.setRecieverWalletAddress(solanaTransactionRequest.getRecieverWalletAddress());
             depositData.setDepositDate(new Timestamp(System.currentTimeMillis()));
             depositTransactionsRepository.save(depositData);
+            discordService.sendMessage(user.getUsername(), solanaTransactionRequest.getAmount(), depositAmount);
 
         }
 

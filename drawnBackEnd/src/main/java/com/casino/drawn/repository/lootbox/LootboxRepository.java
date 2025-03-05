@@ -8,4 +8,6 @@ public interface LootboxRepository extends JpaRepository<Lootbox, Integer> {
     Lootbox getLootboxById(int id);
     Lootbox getLootboxByName(String name);
     Lootbox getLootboxByLootboxName(String lootboxName);
+
+    Lootbox findByLootboxName(String lootboxName);
 }

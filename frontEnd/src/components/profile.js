@@ -15,7 +15,9 @@ import {
   ChevronLeft, 
   Sparkles,
   DollarSign,
-  BarChart4
+  BarChart4,
+  ArrowDownCircle,
+  ArrowUpCircle
 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
@@ -424,7 +426,10 @@ const Profile = () => {
                                         <div className="flex items-center justify-between">
                                             <div>
                                                 <p className="text-gray-400 font-medium text-sm">Total Deposits</p>
-                                                <p className="text-2xl font-bold text-white">{formatCurrency(userData?.totalDeposit || 0)}</p>
+                                                <div className="flex flex-col">
+                                                    <p className="text-2xl font-bold text-white">{formatCurrency(userData?.totalDeposit || 0)}</p>
+                                                    <p className="text-lg text-gray-400">{formatSol(convertUsdToSol(userData?.totalDeposit || 0))}</p>
+                                                </div>
                                             </div>
                                             <div className="w-12 h-12 rounded-full bg-green-500/10 flex items-center justify-center">
                                                 <ArrowDownLeft size={20} className="text-green-500" />
@@ -478,8 +483,9 @@ const Profile = () => {
                                                         <p className="text-white font-medium">Deposit</p>
                                                         <p className="text-gray-400 text-sm">{formatDate(depositTransactions[0].transactionDate)}</p>
                                                     </div>
-                                                    <div className="ml-auto">
-                                                        <p className="text-green-500 font-bold">{formatCurrency(depositTransactions[0].amount)}</p>
+                                                    <div className="ml-auto text-right">
+                                                        <p className="text-green-500 font-bold">{formatSol(depositTransactions[0].amount)}</p>
+                                                        <p className="text-gray-400 text-sm">{formatCurrency(depositTransactions[0].amount * solPrice)}</p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -528,129 +534,81 @@ const Profile = () => {
                         {/* Transactions Tab */}
                         {activeTab === 'transactions' && (
                             <div>
-                                {/* Deposits Section */}
+                                {/* Deposits */}
                                 <div className="mb-8">
-                                    <div className="flex justify-between items-center mb-4">
-                                        <h3 className="text-lg font-bold text-white flex items-center">
-                                            <ArrowDownLeft size={18} className="text-green-500 mr-2" />
-                                            Deposits
-                                        </h3>
-                                        <div className="flex items-center space-x-2">
-                                            <button 
-                                                onClick={() => handlePrevPage('deposits')}
-                                                disabled={currentPage.deposits === 1}
-                                                className="p-1 rounded bg-gray-800 text-gray-400 disabled:opacity-50 disabled:cursor-not-allowed"
-                                            >
-                                                <ChevronLeft size={18} />
-                                            </button>
-                                            <span className="text-gray-400 text-sm">
-                                                {currentPage.deposits} / {depositPagination}
-                                            </span>
-                                            <button 
-                                                onClick={() => handleNextPage('deposits')}
-                                                disabled={currentPage.deposits === depositPagination}
-                                                className="p-1 rounded bg-gray-800 text-gray-400 disabled:opacity-50 disabled:cursor-not-allowed"
-                                            >
-                                                <ChevronRight size={18} />
-                                            </button>
-                                        </div>
-                                    </div>
-
-                                    <div className="bg-gray-800/30 rounded-xl overflow-hidden border border-gray-700/50">
-                                        <div className="overflow-x-auto">
-                                            <table className="w-full">
-                                                <thead>
-                                                    <tr className="bg-gray-800/50 text-left">
-                                                        <th className="p-4 text-gray-400 font-medium text-sm">Transaction ID</th>
-                                                        <th className="p-4 text-gray-400 font-medium text-sm">Date</th>
-                                                        <th className="p-4 text-gray-400 font-medium text-sm text-right">Amount (SOL)</th>
-                                                        <th className="p-4 text-gray-400 font-medium text-sm text-right">Amount (USD)</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    {getCurrentItems(depositTransactions, 'deposits').length > 0 ? (
-                                                        getCurrentItems(depositTransactions, 'deposits').map((tx) => (
-                                                            <tr key={tx.transactionId} className="border-t border-gray-700/50">
-                                                                <td className="p-4 text-white">{tx.transactionId}</td>
-                                                                <td className="p-4 text-gray-300">{formatDate(tx.transactionDate)}</td>
-                                                                <td className="p-4 text-green-500 font-medium text-right">{formatSol(tx.amount)}</td>
-                                                                <td className="p-4 text-green-500/80 font-medium text-right">{formatCurrency(convertSolToUsd(tx.amount))}</td>
-                                                            </tr>
-                                                        ))
-                                                    ) : (
-                                                        <tr className="border-t border-gray-700/50">
-                                                            <td colSpan={4} className="p-4 text-gray-400 text-center">No deposit transactions found</td>
-                                                        </tr>
-                                                    )}
-                                                </tbody>
-                                            </table>
-                                        </div>
+                                    <h3 className="text-lg font-bold text-white flex items-center mb-4">
+                                        <ArrowDownCircle size={18} className="text-green-500 mr-2" />
+                                        Deposits
+                                    </h3>
+                                    <div className="grid grid-cols-1 lg:grid-cols-1 gap-4">
+                                        {getCurrentItems(depositTransactions, 'deposits').length > 0 ? (
+                                            getCurrentItems(depositTransactions, 'deposits').map((deposit, index) => (
+                                                <div key={index} className="bg-gray-800/50 rounded-xl p-4 border border-gray-700/50 lg:flex lg:items-center lg:justify-between">
+                                                    <div className="flex items-center space-x-4 mb-2 lg:mb-0">
+                                                        <div className="p-2 bg-green-500/10 rounded-lg">
+                                                            <ArrowDownCircle size={16} className="text-green-500" />
+                                                        </div>
+                                                        <div>
+                                                            <span className="text-sm text-gray-400">Deposit</span>
+                                                            <p className="text-xs text-gray-500">{formatDate(deposit.transactionDate)}</p>
+                                                        </div>
+                                                    </div>
+                                                    <div className="flex items-center justify-between lg:space-x-8">
+                                                        <div className="text-sm">
+                                                            <span className="text-gray-400">Amount SOL :</span>
+                                                            <span className="ml-2 text-gray-300">{deposit.amount}</span>
+                                                        </div>
+                                                        <div className="text-sm">
+                                                            <span className="text-gray-400">Status:</span>
+                                                            <span className="ml-2 text-green-500">Completed</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            ))
+                                        ) : (
+                                            <div className="col-span-full bg-gray-800/30 rounded-xl p-6 border border-gray-700/50 text-center">
+                                                <p className="text-gray-400">No deposit transactions found</p>
+                                            </div>
+                                        )}
                                     </div>
                                 </div>
 
-                                {/* Withdrawals Section */}
-                                <div className="mb-8">
-                                    <div className="flex justify-between items-center mb-4">
-                                        <h3 className="text-lg font-bold text-white flex items-center">
-                                            <ArrowUpRight size={18} className="text-blue-500 mr-2" />
-                                            Withdrawals
-                                        </h3>
-                                        <div className="flex items-center space-x-2">
-                                            <button 
-                                                onClick={() => handlePrevPage('withdrawals')}
-                                                disabled={currentPage.withdrawals === 1}
-                                                className="p-1 rounded bg-gray-800 text-gray-400 disabled:opacity-50 disabled:cursor-not-allowed"
-                                            >
-                                                <ChevronLeft size={18} />
-                                            </button>
-                                            <span className="text-gray-400 text-sm">
-                                                {currentPage.withdrawals} / {withdrawPagination}
-                                            </span>
-                                            <button 
-                                                onClick={() => handleNextPage('withdrawals')}
-                                                disabled={currentPage.withdrawals === withdrawPagination}
-                                                className="p-1 rounded bg-gray-800 text-gray-400 disabled:opacity-50 disabled:cursor-not-allowed"
-                                            >
-                                                <ChevronRight size={18} />
-                                            </button>
-                                        </div>
-                                    </div>
-
-                                    <div className="bg-gray-800/30 rounded-xl overflow-hidden border border-gray-700/50">
-                                        <div className="overflow-x-auto">
-                                            <table className="w-full">
-                                                <thead>
-                                                    <tr className="bg-gray-800/50 text-left">
-                                                        <th className="p-4 text-gray-400 font-medium text-sm">Transaction ID</th>
-                                                        <th className="p-4 text-gray-400 font-medium text-sm">Date</th>
-                                                        <th className="p-4 text-gray-400 font-medium text-sm">Address</th>
-                                                        <th className="p-4 text-gray-400 font-medium text-sm text-right">Amount (SOL)</th>
-                                                        <th className="p-4 text-gray-400 font-medium text-sm text-right">Amount (USD)</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    {getCurrentItems(withdrawTransactions, 'withdrawals').length > 0 ? (
-                                                        getCurrentItems(withdrawTransactions, 'withdrawals').map((tx) => (
-                                                            <tr key={tx.transactionId} className="border-t border-gray-700/50">
-                                                                <td className="p-4 text-white">{tx.transactionId}</td>
-                                                                <td className="p-4 text-gray-300">{formatDate(tx.transactionDate)}</td>
-                                                                <td className="p-4 text-gray-300">
-                                                                    <span className="bg-gray-700 rounded px-2 py-1 text-xs font-mono">
-                                                                        {truncateAddress(tx.recieverAddress)}
-                                                                    </span>
-                                                                </td>
-                                                                <td className="p-4 text-blue-500 font-medium text-right">{formatSol(convertUsdToSol(tx.amount))}</td>
-                                                                <td className="p-4 text-blue-500/80 font-medium text-right">{formatCurrency(tx.amount)}</td>
-                                                            </tr>
-                                                        ))
-                                                    ) : (
-                                                        <tr className="border-t border-gray-700/50">
-                                                            <td colSpan={5} className="p-4 text-gray-400 text-center">No withdrawal transactions found</td>
-                                                        </tr>
-                                                    )}
-                                                </tbody>
-                                            </table>
-                                        </div>
+                                {/* Withdrawals */}
+                                <div>
+                                    <h3 className="text-lg font-bold text-white flex items-center mb-4">
+                                        <ArrowUpCircle size={18} className="text-red-500 mr-2" />
+                                        Withdrawals
+                                    </h3>
+                                    <div className="grid grid-cols-1 lg:grid-cols-1 gap-4">
+                                        {getCurrentItems(withdrawTransactions, 'withdrawals').length > 0 ? (
+                                            getCurrentItems(withdrawTransactions, 'withdrawals').map((withdrawal, index) => (
+                                                <div key={index} className="bg-gray-800/50 rounded-xl p-4 border border-gray-700/50 lg:flex lg:items-center lg:justify-between">
+                                                    <div className="flex items-center space-x-4 mb-2 lg:mb-0">
+                                                        <div className="p-2 bg-red-500/10 rounded-lg">
+                                                            <ArrowUpCircle size={16} className="text-red-500" />
+                                                        </div>
+                                                        <div>
+                                                            <span className="text-sm text-gray-400">Withdrawal</span>
+                                                            <p className="text-xs text-gray-500">{formatDate(withdrawal.transactionDate)}</p>
+                                                        </div>
+                                                    </div>
+                                                    <div className="flex items-center justify-between lg:space-x-8">
+                                                        <div className="text-sm">
+                                                            <span className="text-gray-400">Amount:</span>
+                                                            <span className="ml-2 text-gray-300">{formatCurrency(withdrawal.amount)}</span>
+                                                        </div>
+                                                        <div className="text-sm">
+                                                            <span className="text-gray-400">Status:</span>
+                                                            <span className="ml-2 text-green-500">Completed</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            ))
+                                        ) : (
+                                            <div className="col-span-full bg-gray-800/30 rounded-xl p-6 border border-gray-700/50 text-center">
+                                                <p className="text-gray-400">No withdrawal transactions found</p>
+                                            </div>
+                                        )}
                                     </div>
                                 </div>
                             </div>
@@ -670,9 +628,9 @@ const Profile = () => {
                                             <button 
                                                 onClick={() => handlePrevPage('lootboxes')}
                                                 disabled={currentPage.lootboxes === 1}
-                                                className="p-1 rounded bg-gray-800 text-gray-400 disabled:opacity-50 disabled:cursor-not-allowed"
+                                                className="p-2 rounded-lg bg-gray-800 text-gray-400 hover:text-white disabled:opacity-50 disabled:cursor-not-allowed"
                                             >
-                                                <ChevronLeft size={18} />
+                                                <ChevronLeft size={20} />
                                             </button>
                                             <span className="text-gray-400 text-sm">
                                                 {currentPage.lootboxes} / {boxPagination}
@@ -680,64 +638,64 @@ const Profile = () => {
                                             <button 
                                                 onClick={() => handleNextPage('lootboxes')}
                                                 disabled={currentPage.lootboxes === boxPagination}
-                                                className="p-1 rounded bg-gray-800 text-gray-400 disabled:opacity-50 disabled:cursor-not-allowed"
+                                                className="p-2 rounded-lg bg-gray-800 text-gray-400 hover:text-white disabled:opacity-50 disabled:cursor-not-allowed"
                                             >
-                                                <ChevronRight size={18} />
+                                                <ChevronRight size={20} />
                                             </button>
                                         </div>
                                     </div>
 
-                                    <div className="bg-gray-800/30 rounded-xl overflow-hidden border border-gray-700/50">
-                                        <div className="overflow-x-auto">
-                                            <table className="w-full">
-                                                <thead>
-                                                    <tr className="bg-gray-800/50 text-left">
-                                                        <th className="p-4 text-gray-400 font-medium text-sm">Box Name</th>
-                                                        <th className="p-4 text-gray-400 font-medium text-sm">Date</th>
-                                                        <th className="p-4 text-gray-400 font-medium text-sm">Price</th>
-                                                        <th className="p-4 text-gray-400 font-medium text-sm text-right">Value</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    {getCurrentItems(lootboxHistory, 'lootboxes').length > 0 ? (
-                                                        getCurrentItems(lootboxHistory, 'lootboxes').map((box, index) => (
-                                                            <tr key={index} className="border-t border-gray-700/50">
-                                                                <td className="p-4">
-                                                                    <div className="flex items-center">
-                                                                        <div className="w-8 h-8 rounded-full bg-yellow-500/10 flex items-center justify-center mr-3">
-                                                                            <Gift size={16} className="text-yellow-500" />
-                                                                        </div>
-                                                                        <span className="text-white capitalize">{box.lootboxName}</span>
-                                                                    </div>
-                                                                </td>
-                                                                <td className="p-4 text-gray-300">{formatDate(box.timeOpened)}</td>
-                                                                <td className="p-4 text-gray-300">{formatCurrency(box.lootboxPrice)}</td>
-                                                                <td className="p-4 text-right">
-                                                                    <div className="flex items-center justify-end">
-                                                                        <p className={`font-bold ${box.itemWonValue > box.lootboxPrice ? 'text-green-500' : 'text-yellow-500'}`}>
-                                                                            {formatCurrency(box.itemWonValue)}
-                                                                        </p>
-                                                                        {box.itemWonValue > box.lootboxPrice && (
-                                                                            <span className="ml-2 bg-green-500/20 text-green-500 text-xs px-2 py-1 rounded-full">
-                                                                                +{formatCurrency(box.itemWonValue - box.lootboxPrice)}
-                                                                            </span>
-                                                                        )}
-                                                                    </div>
-                                                                </td>
-                                                            </tr>
-                                                        ))
-                                                    ) : (
-                                                        <tr className="border-t border-gray-700/50">
-                                                            <td colSpan={4} className="p-4 text-gray-400 text-center">No lootbox history found</td>
-                                                        </tr>
-                                                    )}
-                                                </tbody>
-                                            </table>
-                                        </div>
+                                    <div className="grid grid-cols-1 lg:grid-cols-1 gap-4">
+                                        {getCurrentItems(lootboxHistory, 'lootboxes').length > 0 ? (
+                                            getCurrentItems(lootboxHistory, 'lootboxes').map((box, index) => (
+                                                <div key={index} className="bg-gray-800/50 rounded-xl p-4 border border-gray-700/50 lg:flex lg:items-center lg:justify-between">
+                                                    <div className="flex items-center space-x-4 mb-2 lg:mb-0">
+                                                        <div className="p-2 bg-yellow-500/10 rounded-lg">
+                                                            <Gift size={16} className="text-yellow-500" />
+                                                        </div>
+                                                        <div>
+                                                            <span className="text-sm text-gray-400 capitalize">{box.lootboxName}</span>
+                                                            <p className="text-xs text-gray-500">{formatDate(box.timeOpened)}</p>
+                                                        </div>
+                                                    </div>
+                                                    <div className="flex items-center justify-between lg:space-x-8">
+                                                        <div className="flex items-center space-x-4">
+                                                            <div className="text-sm">
+                                                                <span className="text-gray-400">Price:</span>
+                                                                <span className="ml-2 text-gray-300">{formatCurrency(box.lootboxPrice)}</span>
+                                                            </div>
+                                                            <div className="text-sm">
+                                                                <span className="text-gray-400">Value:</span>
+                                                                <span className={`ml-2 font-bold ${box.itemWonValue > box.lootboxPrice ? 'text-green-500' : 'text-yellow-500'}`}>
+                                                                    {formatCurrency(box.itemWonValue)}
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                        {box.itemWonValue > box.lootboxPrice && (
+                                                            <span className="bg-green-500/20 text-green-500 text-xs px-2 py-1 rounded-full">
+                                                                +{formatCurrency(box.itemWonValue - box.lootboxPrice)}
+                                                            </span>
+                                                        )}
+                                                    </div>
+                                                </div>
+                                            ))
+                                        ) : (
+                                            <div className="col-span-full bg-gray-800/30 rounded-xl p-6 border border-gray-700/50 text-center">
+                                                <p className="text-gray-400">No lootbox history found</p>
+                                            </div>
+                                        )}
                                     </div>
                                 </div>
                             </div>
                         )}
+                    </div>
+                </div>
+                {/* Support Contact Section */}
+                <div className="max-w-6xl mx-auto mt-8 text-center">
+                    <div className="bg-gray-800/50 rounded-xl p-4 border border-gray-700/50">
+                        <p className="text-gray-400">
+                            Contact Support: <a href="mailto:support@drawngg.com" className="text-yellow-500 hover:text-yellow-400">support@drawngg.com</a>
+                        </p>
                     </div>
                 </div>
             </div>

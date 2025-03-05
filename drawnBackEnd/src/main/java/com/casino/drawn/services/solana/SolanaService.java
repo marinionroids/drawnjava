@@ -1,13 +1,20 @@
 package com.casino.drawn.services.solana;
 
 
+import com.casino.drawn.dto.solana.ManualTransactions;
 import com.casino.drawn.model.solana.SecretKeyPair;
+import com.casino.drawn.repository.solana.DepositTransactionsRepository;
 import com.casino.drawn.repository.solana.SecretKeyPairRepository;
 import org.p2p.solanaj.core.Account;
 import org.p2p.solanaj.rpc.RpcClient;
+import org.springframework.http.ResponseEntity;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -17,6 +24,7 @@ public class SolanaService {
 
     public SolanaService(SecretKeyPairRepository secretKeyPairRepository) {
         this.secretKeyPairRepository = secretKeyPairRepository;
+
     }
 
 
@@ -33,7 +41,7 @@ public class SolanaService {
     public SecretKeyPair createRecieverWallet() {
 
         SecretKeyPair secretKeyPair = new SecretKeyPair();
-        new RpcClient("https://api.devnet.solana.com");
+        new RpcClient("https://api.mainnet-beta.solana.com");
         Account account = new Account();
         String recieverPublicKey = account.getPublicKey().toBase58();
         byte[] recieverPrivateKey = account.getSecretKey();
@@ -43,4 +51,6 @@ public class SolanaService {
         return secretKeyPair;
 
     }
+
+
 }

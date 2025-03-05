@@ -7,7 +7,9 @@ import priceIcon from '../../images/priceIcon.png';
 const PhantomDeposit = ({ onClose, setError, setSuccessMessage }) => {
     const [amount, setAmount] = useState('');
     const [isLoading, setIsLoading] = useState(false);
-    const connection = new Connection('https://api.devnet.solana.com');
+    const connection = new Connection(
+        'https://solana-mainnet.core.chainstack.com/34501e83ff7f1277b3792422179b8598'
+    );
     const receivingAddress = Cookies.get('recievingAddress') || '';
 
     const handleDeposit = async () => {
@@ -83,9 +85,21 @@ const PhantomDeposit = ({ onClose, setError, setSuccessMessage }) => {
             // Get recent blockhash
             let blockhashInfo;
             try {
-                blockhashInfo = await connection.getLatestBlockhash('finalized');
+                const getBlockhash = async (retries = 3) => {
+                    try {
+                        return await connection.getLatestBlockhash();
+                    } catch (err) {
+                        console.warn(`Blockhash fetch attempt failed: ${err.message}`);
+                        if (retries <= 0) throw err;
+                        await new Promise(resolve => setTimeout(resolve, 1000));
+                        return getBlockhash(retries - 1);
+                    }
+                };
+                
+                blockhashInfo = await getBlockhash();
             } catch (err) {
-                throw new Error(`Network error: ${err.message}`);
+                console.error("All blockhash fetch attempts failed:", err);
+                throw new Error(`Network error: failed to get recent blockhash: ${err.message}`);
             }
             
             const { blockhash, lastValidBlockHeight } = blockhashInfo;
@@ -121,30 +135,6 @@ const PhantomDeposit = ({ onClose, setError, setSuccessMessage }) => {
                     throw new Error('Insufficient funds for transaction');
                 }
                 throw new Error(`Failed to sign transaction: ${err.message}`);
-            }
-
-            // Confirm transaction
-            try {
-                console.log("Confirming transaction...");
-                const confirmation = await Promise.race([
-                    connection.confirmTransaction({
-                        signature,
-                        blockhash,
-                        lastValidBlockHeight,
-                    }),
-                    new Promise((_, reject) => 
-                        setTimeout(() => reject(new Error('Transaction confirmation timeout')), 
-                        60000)
-                    )
-                ]);
-
-                if (confirmation.value?.err) {
-                    throw new Error(`Transaction failed: ${confirmation.value.err}`);
-                }
-                console.log("Transaction confirmed successfully");
-            } catch (err) {
-                console.error("Confirmation error:", err);
-                throw new Error(`Transaction might have been submitted but could not be confirmed: ${err.message}`);
             }
 
             // Notify backend

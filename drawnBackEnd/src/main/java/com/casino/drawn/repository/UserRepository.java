@@ -13,4 +13,5 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     User findByPrimaryWalletAddress(String walletAddress);
 
     User findByRecieverAddress(String recieverAddress);
+    boolean existsByRecieverAddress(String recieverAddress);
 }

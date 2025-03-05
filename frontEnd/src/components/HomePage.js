@@ -2,13 +2,30 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import priceIcon from '../images/priceIcon.png';
-import { TrendingUp, Star, Sparkles } from 'lucide-react';
+import { TrendingUp, Star, Sparkles, ChevronRight, Trophy } from 'lucide-react';
 import LatestDrops from './LatestDrops';
 
 function HomePage() {
   const [boxes, setBoxes] = useState([]);
   const [category, setCategory] = useState('All');
   const [featuredBox, setFeaturedBox] = useState(null);
+  const [showLatestDrops, setShowLatestDrops] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    // Initial check
+    checkMobile();
+    
+    // Add event listener
+    window.addEventListener('resize', checkMobile);
+    
+    // Cleanup
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   useEffect(() => {
     const fetchBoxes = async () => {
@@ -28,7 +45,7 @@ function HomePage() {
 
   return (
     <main className="min-h-screen bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900 px-4 py-20 md:py-24">
-      <div className="pr-80">
+      <div className={`transition-all duration-300 ${showLatestDrops || !isMobile ? 'md:pr-80' : ''}`}>
         {/* Featured Box Section */}
         {featuredBox && (
           <div className="max-w-7xl mx-auto mb-12">
@@ -103,8 +120,18 @@ function HomePage() {
         </div>
       </div>
 
+      {/* Mobile Latest Drops Toggle Button */}
+      <button
+        onClick={() => setShowLatestDrops(!showLatestDrops)}
+        className="md:hidden fixed right-4 bottom-4 z-50 flex items-center justify-center w-12 h-12 bg-gradient-to-r from-yellow-500 to-orange-500 rounded-full shadow-lg hover:shadow-xl hover:shadow-yellow-500/25 transition-all duration-300 transform hover:scale-110"
+      >
+        <Trophy className="text-gray-900" size={24} />
+      </button>
+
       {/* Latest Drops Sidebar */}
-      <LatestDrops />
+      <div className={`fixed right-0 top-16 h-[calc(100%-4rem)] transition-transform duration-300 transform ${showLatestDrops || !isMobile ? 'translate-x-0' : 'translate-x-full'}`}>
+        <LatestDrops onClose={() => setShowLatestDrops(false)} />
+      </div>
     </main>
   );
 }

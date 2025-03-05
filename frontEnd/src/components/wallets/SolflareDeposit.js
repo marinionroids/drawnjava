@@ -7,7 +7,12 @@ import priceIcon from '../../images/priceIcon.png';
 const SolflareDeposit = ({ onClose, setError, setSuccessMessage }) => {
     const [amount, setAmount] = useState('');
     const [isLoading, setIsLoading] = useState(false);
-    const connection = new Connection('https://api.devnet.solana.com');
+    
+    const connection = new Connection(
+        'https://solana-mainnet.core.chainstack.com/34501e83ff7f1277b3792422179b8598'
+    );
+    
+    
     const receivingAddress = Cookies.get('recievingAddress') || '';
 
     const handleDeposit = async () => {
@@ -50,7 +55,7 @@ const SolflareDeposit = ({ onClose, setError, setSuccessMessage }) => {
                 Cookies.set('walletType', 'solflare', { expires: 1 });
             } catch (err) {
                 console.error("Connection error:", err);
-                if (err.message.includes("User rejected")) {
+                if (err.message?.includes("User rejected")) {
                     setError('Connection request was rejected. Please try again.');
                 } else {
                     setError('Failed to connect to Solflare. Please try again.');
@@ -59,12 +64,25 @@ const SolflareDeposit = ({ onClose, setError, setSuccessMessage }) => {
                 return;
             }
             
-            // Get SOL price
+            // Get SOL price with error handling and retry
             let solPriceUSD;
             try {
-                const priceResponse = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=solana&vs_currencies=usd');
-                const priceData = await priceResponse.json();
-                solPriceUSD = priceData.solana.usd;
+                const fetchPrice = async (retries = 3) => {
+                    try {
+                        const priceResponse = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=solana&vs_currencies=usd');
+                        if (!priceResponse.ok) {
+                            throw new Error(`Price API returned ${priceResponse.status}`);
+                        }
+                        const priceData = await priceResponse.json();
+                        return priceData.solana.usd;
+                    } catch (err) {
+                        if (retries <= 0) throw err;
+                        await new Promise(resolve => setTimeout(resolve, 1000));
+                        return fetchPrice(retries - 1);
+                    }
+                };
+                
+                solPriceUSD = await fetchPrice();
                 
                 if (!solPriceUSD || solPriceUSD <= 0) {
                     throw new Error('Could not get valid SOL price');
@@ -90,12 +108,24 @@ const SolflareDeposit = ({ onClose, setError, setSuccessMessage }) => {
                 throw new Error(`Invalid receiver address: ${err.message}`);
             }
 
-            // Get recent blockhash
+            // Get recent blockhash with retry mechanism
             let blockhashInfo;
             try {
-                blockhashInfo = await connection.getLatestBlockhash('finalized');
+                const getBlockhash = async (retries = 3) => {
+                    try {
+                        return await connection.getLatestBlockhash();
+                    } catch (err) {
+                        console.warn(`Blockhash fetch attempt failed: ${err.message}`);
+                        if (retries <= 0) throw err;
+                        await new Promise(resolve => setTimeout(resolve, 1000));
+                        return getBlockhash(retries - 1);
+                    }
+                };
+                
+                blockhashInfo = await getBlockhash();
             } catch (err) {
-                throw new Error(`Network error: ${err.message}`);
+                console.error("All blockhash fetch attempts failed:", err);
+                throw new Error(`Network error: failed to get recent blockhash: ${err.message}`);
             }
             
             const { blockhash, lastValidBlockHeight } = blockhashInfo;
@@ -143,36 +173,12 @@ const SolflareDeposit = ({ onClose, setError, setSuccessMessage }) => {
                 console.log("Transaction signed successfully:", signature);
             } catch (err) {
                 console.error("Signing error:", err);
-                if (err.message.includes('User rejected')) {
+                if (err.message?.includes('User rejected')) {
                     throw new Error('Transaction was rejected. Please try again.');
-                } else if (err.message.includes('insufficient funds')) {
+                } else if (err.message?.includes('insufficient funds')) {
                     throw new Error('Insufficient funds for transaction');
                 }
                 throw new Error(`Failed to sign transaction: ${err.message}`);
-            }
-
-            // Confirm transaction
-            try {
-                console.log("Confirming transaction...");
-                const confirmation = await Promise.race([
-                    connection.confirmTransaction({
-                        signature,
-                        blockhash,
-                        lastValidBlockHeight,
-                    }),
-                    new Promise((_, reject) => 
-                        setTimeout(() => reject(new Error('Transaction confirmation timeout')), 
-                        60000)
-                    )
-                ]);
-
-                if (confirmation.value?.err) {
-                    throw new Error(`Transaction failed: ${confirmation.value.err}`);
-                }
-                console.log("Transaction confirmed successfully");
-            } catch (err) {
-                console.error("Confirmation error:", err);
-                throw new Error(`Transaction might have been submitted but could not be confirmed: ${err.message}`);
             }
 
             // Notify backend
@@ -202,34 +208,38 @@ const SolflareDeposit = ({ onClose, setError, setSuccessMessage }) => {
                         }),
                     });
 
+                    if (!response.ok) {
+                        const responseData = await response.json();
+                        
+                        if (responseData?.data?.code === 'DUPLICATE_SIGNATURE') {
+                            throw new Error('This transaction has already been processed');
+                        }
+                        
+                        if (retryCount < maxRetries) {
+                            console.log(`Backend notification failed, retrying in ${retryInterval/1000}s...`);
+                            await new Promise(resolve => setTimeout(resolve, retryInterval));
+                            retryCount++;
+                            continue;
+                        } else {
+                            throw new Error(responseData.message || 'Failed to process deposit');
+                        }
+                    }
+                    
                     const responseData = await response.json();
-
-                    if (response.ok) {
-                        console.log("Deposit processed successfully");
-                        setSuccessMessage('Deposit processed successfully!');
-                        setTimeout(() => {
-                            onClose();
-                        }, 1000);
-                        return;
-                    }
-
-                    if (responseData?.data?.code === 'DUPLICATE_SIGNATURE') {
-                        throw new Error('This transaction has already been processed');
-                    }
-
-                    if (retryCount < maxRetries) {
-                        console.log(`Backend notification failed, retrying in ${retryInterval/1000}s...`);
-                        await new Promise(resolve => setTimeout(resolve, retryInterval));
-                    } else {
-                        throw new Error(responseData.message || 'Failed to process deposit');
-                    }
+                    console.log("Deposit processed successfully");
+                    setSuccessMessage('Deposit processed successfully!');
+                    setTimeout(() => {
+                        onClose();
+                    }, 1000);
+                    return;
+                    
                 } catch (err) {
                     if (retryCount >= maxRetries) {
                         console.error("Backend notification failed after all retries:", err);
                         throw new Error(`Failed to process deposit after multiple attempts: ${err.message}`);
                     }
+                    retryCount++;
                 }
-                retryCount++;
             }
 
         } catch (err) {

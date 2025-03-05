@@ -46,7 +46,7 @@ public class WithdrawService {
 
     private boolean validWithdrawBalance(float withdrawAmount) throws RpcException {
 
-        RpcClient client = new RpcClient(Cluster.DEVNET);
+        RpcClient client = new RpcClient(Cluster.MAINNET);
         PublicKey withdrawPublicKey = new PublicKey(fromWalletPublicKey);
         // We get the casino's balance(lamports), turn it into SOL and then get the user request's amound(USD) turn that into SOL and compare.
         long balanceInLamports = client.getApi().getBalance(withdrawPublicKey);
@@ -75,7 +75,7 @@ public class WithdrawService {
 
             // Create Solana Transaction.
 
-            RpcClient client = new RpcClient(Cluster.DEVNET);
+            RpcClient client = new RpcClient(Cluster.MAINNET);
             PublicKey fromPublicKey = new PublicKey(fromWalletPublicKey);
             PublicKey toPublicKey = new PublicKey(request.getToWallet());
             float currentSOLPriceinUSD = solanaService.getSolanaPrice();

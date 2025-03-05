@@ -23,7 +23,7 @@ function App() {
       []
   );
 
-  const endpoint = useMemo(() => clusterApiUrl('devnet'), []);
+  const endpoint = useMemo(() => clusterApiUrl('mainnet-beta'), []);
 
   return (
       <div className="debug-app">

@@ -45,6 +45,9 @@ const WithdrawForm = ({ onClose, setError, setSuccessMessage }) => {
             const responseData = await response.json();
 
             if (!response.ok) {
+                if (responseData.data?.code === 'WAGER_AMOUNT_NOT_MET') {
+                    throw new Error(responseData.data.message);
+                }
                 throw new Error(responseData.message || 'Failed to process withdrawal');
             }
 

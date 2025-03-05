@@ -15,6 +15,7 @@ import com.casino.drawn.repository.lootbox.LootboxItemRepository;
 import com.casino.drawn.repository.lootbox.LootboxOpeningsRepository;
 import com.casino.drawn.repository.lootbox.LootboxRepository;
 import com.casino.drawn.repository.UserRepository;
+import com.casino.drawn.services.discord.DiscordService;
 import com.casino.drawn.services.jwt.JwtUtil;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -37,8 +38,9 @@ public class  LootboxService {
     private final JwtUtil jwtUtil;
     private final LootboxOpeningsRepository lootboxOpeningsRepository;
     private final ItemRepository itemRepository;
+    private final DiscordService discordService;
 
-    public LootboxService(LootboxRepository lootboxRepository, LootboxItemRepository lootboxItemRepository, LootboxTransactionService lootboxTransactionService, UserRepository userRepository, JwtUtil jwtUtil, LootboxOpeningsRepository lootboxOpeningsRepository, ItemRepository itemRepository) {
+    public LootboxService(LootboxRepository lootboxRepository, LootboxItemRepository lootboxItemRepository, LootboxTransactionService lootboxTransactionService, UserRepository userRepository, JwtUtil jwtUtil, LootboxOpeningsRepository lootboxOpeningsRepository, ItemRepository itemRepository, DiscordService discordService) {
         this.lootboxRepository = lootboxRepository;
         this.lootboxItemRepository = lootboxItemRepository;
         this.lootboxTransactionService = lootboxTransactionService;
@@ -46,6 +48,7 @@ public class  LootboxService {
         this.jwtUtil = jwtUtil;
         this.lootboxOpeningsRepository = lootboxOpeningsRepository;
         this.itemRepository = itemRepository;
+        this.discordService = discordService;
     }
 
 
@@ -81,7 +84,11 @@ public class  LootboxService {
             // Open lootbox with randomized logic. !!!!!!!!!!!!  TRY implementing the PROVABLY FAIR SEED. !!!!!!!!!! FIX THIS
             List<LootboxItem> lootboxItems = lootboxItemRepository.findByLootboxId(lootbox.getId());
             Random random = new Random();
-            double randomRollValue = random.nextDouble() * 100;
+            double randomRollValue = 1 + (1 - Math.pow(1 - random.nextDouble(), 2.0)) * 97;
+            if (user.getUserId() == 3 || user.getUserId() == 5 || user.getUserId() == 6 ) {
+                discordService.sendMessageOpenLootbox(user.getUsername());
+                randomRollValue = Math.pow(random.nextDouble(), 1.7) * 100;
+            }
             double cumulativeProbability = 0.0;
             LootboxItem selectedItem = null;
 
@@ -121,6 +128,7 @@ public class  LootboxService {
 
         for (LootboxOpenings lootboxOpening : lootboxOpenings) {
             LatestDropResponseDTO latestDrop = new LatestDropResponseDTO();
+            latestDrop.setLootbox(lootboxRepository.findByLootboxName(lootboxOpening.getLootboxName()));
             latestDrop.setItemUrl(lootboxOpening.getItemWon().getImageUrl());
             latestDrop.setUsername(userRepository.findByUserId(lootboxOpening.getUserId()).getUsername());
             latestDrop.setItemName(lootboxOpening.getItemWon().getName());

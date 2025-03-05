@@ -117,7 +117,7 @@ const Navbar = ({
                   <div className="bg-gray-800/90 rounded-xl flex items-center p-3 shadow-lg border border-gray-700/50">
                     <div className="flex items-center space-x-2">
                       <img src={priceIcon} alt="Price Icon" className="w-5 h-5" />
-                      <div className="text-white font-semibold">{balance.toFixed(3)}</div>
+                      <div className="text-blue-500 font-bold text-sm">{balance.toFixed(2)}</div>
                     </div>
                     <button
                       onClick={handleOpenDepositModal}

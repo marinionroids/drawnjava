@@ -16,6 +16,21 @@ function LootboxDetails() {
   const [isHovered, setIsHovered] = useState(false);
   const [serverResponse, setServerResponse] = useState(null);
 
+  // Add scroll to top effect
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  const generateTransactionId = () => {
+    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    const length = Math.floor(Math.random() * 3) + 10; // Random length between 10-12
+    let result = '';
+    for (let i = 0; i < length; i++) {
+      result += chars.charAt(Math.floor(Math.random() * chars.length));
+    }
+    return result;
+  };
+
   const getRarityColor = (value) => {
     if (value >= 1000) return 'bg-gradient-to-b from-orange-500/20 to-orange-900/20';
     if (value >= 500) return 'bg-gradient-to-b from-purple-500/20 to-purple-900/20';
@@ -55,7 +70,7 @@ function LootboxDetails() {
           'Authorization': Cookies.get("jwt")
         },
         body: JSON.stringify({
-          transactionId: "randomnow",
+          transactionId: generateTransactionId(),
           lootboxName: name,
           recievingWalletAddress: Cookies.get("recievingAddress"),
         })
