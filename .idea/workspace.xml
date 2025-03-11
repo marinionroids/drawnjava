@@ -5,37 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ddb187d5-c2a8-4b9d-835a-9363af0aa293" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/drawnBackEnd/src/main/java/com/casino/drawn/config/DiscordConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/drawnBackEnd/src/main/java/com/casino/drawn/dto/solana/ManualTransactions.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/drawnBackEnd/src/main/java/com/casino/drawn/services/discord/DiscordService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/drawnBackEnd/src/main/java/com/casino/drawn/services/solana/ManualTransactionService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/drawnBackEnd/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/drawnBackEnd/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/drawnBackEnd/src/main/java/com/casino/drawn/DrawnApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/drawnBackEnd/src/main/java/com/casino/drawn/DrawnApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/drawnBackEnd/src/main/java/com/casino/drawn/dto/lootbox/LatestDropResponseDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/drawnBackEnd/src/main/java/com/casino/drawn/dto/lootbox/LatestDropResponseDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/drawnBackEnd/src/main/java/com/casino/drawn/repository/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/drawnBackEnd/src/main/java/com/casino/drawn/repository/UserRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/drawnBackEnd/src/main/java/com/casino/drawn/repository/lootbox/LootboxRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/drawnBackEnd/src/main/java/com/casino/drawn/repository/lootbox/LootboxRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/drawnBackEnd/src/main/java/com/casino/drawn/services/lootbox/LootboxService.java" beforeDir="false" afterPath="$PROJECT_DIR$/drawnBackEnd/src/main/java/com/casino/drawn/services/lootbox/LootboxService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/drawnBackEnd/src/main/java/com/casino/drawn/services/solana/DepositTransactionService.java" beforeDir="false" afterPath="$PROJECT_DIR$/drawnBackEnd/src/main/java/com/casino/drawn/services/solana/DepositTransactionService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/drawnBackEnd/src/main/java/com/casino/drawn/services/solana/SolanaService.java" beforeDir="false" afterPath="$PROJECT_DIR$/drawnBackEnd/src/main/java/com/casino/drawn/services/solana/SolanaService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/drawnBackEnd/src/main/java/com/casino/drawn/services/solana/WithdrawService.java" beforeDir="false" afterPath="$PROJECT_DIR$/drawnBackEnd/src/main/java/com/casino/drawn/services/solana/WithdrawService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontEnd/frontEnd/asset-manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontEnd/frontEnd/asset-manifest.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontEnd/frontEnd/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontEnd/frontEnd/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontEnd/frontEnd/static/css/main.968a803f.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontEnd/frontEnd/static/css/main.968a803f.css.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontEnd/frontEnd/static/js/main.729a122f.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontEnd/frontEnd/static/js/main.729a122f.js.LICENSE.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontEnd/frontEnd/static/js/main.729a122f.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontEnd/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontEnd/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontEnd/src/components/HomePage.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontEnd/src/components/HomePage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontEnd/src/components/LatestDrops.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontEnd/src/components/LatestDrops.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontEnd/src/components/LootboxDetails.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontEnd/src/components/LootboxDetails.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontEnd/src/components/LootboxOpening.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontEnd/src/components/LootboxOpening.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontEnd/src/components/Navbar.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontEnd/src/components/Navbar.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontEnd/src/components/WithdrawForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontEnd/src/components/WithdrawForm.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontEnd/src/components/profile.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontEnd/src/components/profile.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontEnd/src/components/wallets/PhantomDeposit.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontEnd/src/components/wallets/PhantomDeposit.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontEnd/src/components/wallets/SolflareDeposit.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontEnd/src/components/wallets/SolflareDeposit.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -107,7 +77,7 @@
     &quot;Spring Boot.DrawnApplication.executor&quot;: &quot;Run&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/Projects/localdrawnfrontend&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/Projects/bet&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -230,7 +200,10 @@
       <workItem from="1741034626973" duration="13352000" />
       <workItem from="1741116922882" duration="6895000" />
       <workItem from="1741127349983" duration="5469000" />
-      <workItem from="1741211008686" duration="602000" />
+      <workItem from="1741211008686" duration="3843000" />
+      <workItem from="1741317748762" duration="603000" />
+      <workItem from="1741377202458" duration="10000" />
+      <workItem from="1741378798935" duration="7000" />
     </task>
     <servers />
   </component>
