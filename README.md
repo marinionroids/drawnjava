@@ -1,7 +1,7 @@
 # 🎮 Lootbox Casino
 
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-[![Solana](https://img.shields.io/badge/Solana-Devnet-blueviolet)](https://solana.com/)
+[![Solana](https://img.shields.io/badge/Solana-Mainnet-blueviolet)](https://solana.com/)
 [![Spring Boot](https://img.shields.io/badge/Spring%20Boot-Backend-brightgreen)](https://spring.io/projects/spring-boot)
 
 A next-gen gaming platform combining lootbox mechanics with blockchain technology, built for Solana user authentication wallets.
