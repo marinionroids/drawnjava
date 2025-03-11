@@ -2,7 +2,7 @@
 
 ✨ LIVE PRODUCT
 
-[![DRAWNGG.COM](https://img.shields.io/badge/DRAWN-GG-yellow)](https://drawngg.com/)
+Check it out! -->  [![DRAWNGG.COM](https://img.shields.io/badge/DRAWN-GG-yellow)](https://drawngg.com/)
 
 
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
