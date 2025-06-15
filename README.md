@@ -9,6 +9,8 @@ Check it out! -->  [![DRAWNGG.COM](https://img.shields.io/badge/DRAWN-GG-yellow)
 [![Solana](https://img.shields.io/badge/Solana-Mainnet-blueviolet)](https://solana.com/)
 [![Spring Boot](https://img.shields.io/badge/Spring%20Boot-Backend-brightgreen)](https://spring.io/projects/spring-boot)
 
+[DeepWiki](https://deepwiki.com/marinionroids/drawnjava)   --> Comprehensive overview of the repository
+
 A next-gen gaming platform combining lootbox mechanics with blockchain technology, built for Solana user authentication wallets.
 
 ![Lootbox Casino Banner](https://github.com/user-attachments/assets/da0fca4e-6190-4763-8853-4cb13e28dd99)
